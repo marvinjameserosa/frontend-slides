@@ -1,0 +1,2784 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zero-Budget Engineering // Networking Club Leadership</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===========================================
+   1. FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   =========================================== */
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: #000000;
+        color: #ededed;
+        font-family: var(--font-display);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        user-select: none;
+        cursor: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .deck-viewport {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background: #000000;
+      }
+
+      .deck-stage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        transform-origin: 0 0;
+        background: #000000;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 90px 140px;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        background: transparent;
+        transition:
+          opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+          visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .slide.active,
+      .slide.visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1;
+      }
+
+      img,
+      video,
+      canvas,
+      svg {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      @media print {
+        html,
+        body {
+          width: 1920px;
+          height: auto;
+          overflow: visible;
+          background: #000000;
+          cursor: default;
+        }
+        .deck-viewport {
+          position: static;
+          overflow: visible;
+          background: #000000;
+        }
+        .deck-stage {
+          position: static;
+          width: auto;
+          height: auto;
+          transform: none !important;
+          background: none;
+        }
+        .slide {
+          position: relative;
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          pointer-events: auto !important;
+          width: 1920px;
+          height: 1080px;
+          break-after: page;
+          page-break-after: always;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.2s !important;
+        }
+      }
+
+      /* ===========================================
+   2. VERCEL DESIGN SYSTEM TOKENS
+   =========================================== */
+      :root {
+        --bg-dark: #000000;
+        --bg-surface: rgba(255, 255, 255, 0.03);
+        --bg-surface-elevated: rgba(255, 255, 255, 0.06);
+
+        /* Vercel Geist Palette */
+        --text-pure: #ffffff;
+        --text-primary: #ededed;
+        --text-secondary: #a1a1a1;
+        --text-muted: #707070;
+        --text-subtle: #525252;
+
+        --border-precision: rgba(255, 255, 255, 0.1);
+        --border-focus: rgba(255, 255, 255, 0.25);
+        --border-bright: rgba(255, 255, 255, 0.5);
+
+        /* Typography */
+        --font-display:
+          "Geist", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "Geist Mono", "JetBrains Mono", "SF Mono", monospace;
+        --font-body: "Geist", "Inter", -apple-system, sans-serif;
+
+        /* Motion */
+        --fuji-ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --duration-reveal: 0.75s;
+      }
+
+      /* ===========================================
+   3. TYPOGRAPHY & REVEAL CHOREOGRAPHY
+   =========================================== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity var(--duration-reveal) var(--fuji-ease),
+          transform var(--duration-reveal) var(--fuji-ease),
+          filter var(--duration-reveal) var(--fuji-ease);
+      }
+
+      .slide.active .reveal {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .slide.active .reveal.delay-1 {
+        transition-delay: 0.1s;
+      }
+      .slide.active .reveal.delay-2 {
+        transition-delay: 0.22s;
+      }
+      .slide.active .reveal.delay-3 {
+        transition-delay: 0.36s;
+      }
+      .slide.active .reveal.delay-4 {
+        transition-delay: 0.5s;
+      }
+      .slide.active .reveal.delay-5 {
+        transition-delay: 0.65s;
+      }
+
+      .question-hook-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 1440px;
+        padding: 0 40px;
+      }
+
+      .hook-question-headline {
+        font-family: var(--font-display);
+        font-size: 88px;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        line-height: 1.12;
+        margin: 0;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          rgba(255, 255, 255, 0.7) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .story-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 1440px;
+        padding: 0 40px;
+      }
+
+      .story-statement {
+        font-family: var(--font-display);
+        font-size: 56px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.18;
+        margin: 0;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          rgba(255, 255, 255, 0.75) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .story-sub {
+        font-family: var(--font-body);
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin: 18px 0 0 0;
+        max-width: 1040px;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        text-align: center;
+      }
+
+      .story-stat {
+        font-family: var(--font-mono);
+        font-size: 130px;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        color: #ffffff;
+        margin: 16px 0;
+        text-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
+      }
+
+      /* Big Focal Diagram Stage */
+      .diagram-stage {
+        width: 1140px;
+        height: 300px;
+        margin: 36px auto 0 auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cluster-line {
+        stroke: rgba(255, 255, 255, 0.22);
+        stroke-width: 1.5;
+        stroke-dasharray: 6 6;
+        animation: streamDash 15s linear infinite;
+      }
+
+      .cluster-line-active {
+        stroke: rgba(255, 255, 255, 0.5);
+        stroke-width: 2;
+        stroke-dasharray: 6 6;
+        animation: streamDash 8s linear infinite;
+      }
+
+      @keyframes streamDash {
+        to {
+          stroke-dashoffset: -200;
+        }
+      }
+
+      .packet-dot {
+        fill: #ffffff;
+        filter: drop-shadow(0 0 8px #ffffff);
+      }
+
+      .packet-dot-danger {
+        fill: #ff4d4d;
+        filter: drop-shadow(0 0 8px #ff4d4d);
+      }
+
+      .diagram-box {
+        fill: #0c0c0c;
+        stroke: rgba(255, 255, 255, 0.18);
+        stroke-width: 1.5;
+        rx: 8px;
+      }
+
+      .diagram-box-highlight {
+        fill: #141414;
+        stroke: #f5ee38;
+        stroke-width: 1.5;
+        rx: 8px;
+        filter: drop-shadow(0 0 20px rgba(245, 238, 56, 0.22));
+      }
+
+      .diagram-box-barrier {
+        fill: rgba(255, 60, 60, 0.06);
+        stroke: rgba(255, 80, 80, 0.55);
+        stroke-dasharray: 6 6;
+        stroke-width: 1.5;
+        rx: 8px;
+      }
+
+      .diagram-txt-title {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 600;
+        fill: #ededed;
+        text-anchor: middle;
+      }
+
+      .diagram-txt-sub {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 400;
+        fill: #888888;
+        text-anchor: middle;
+      }
+
+      .diagram-txt-accent {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        fill: #f5ee38;
+        text-anchor: middle;
+      }
+
+      /* ===========================================
+   4. VERCEL DESIGN SYSTEM COMPONENTS
+   =========================================== */
+      .badge {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 0 8px #ffffff;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        width: 1200px;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+        width: 1260px;
+      }
+
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        width: 1240px;
+      }
+
+      .code-inline {
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 3px 7px;
+        border-radius: 4px;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .arch-tier {
+        padding: 32px 28px;
+        border-radius: 14px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04) 0%,
+          rgba(255, 255, 255, 0.01) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        text-align: left;
+      }
+
+      .arch-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: var(--text-muted);
+      }
+
+      .prompt-box {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          rgba(255, 255, 255, 0.015) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 16px;
+        padding: 40px;
+        text-align: left;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.14),
+          0 20px 50px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Presenter Cue & Engagement Banner */
+      .presenter-cue {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(10, 10, 10, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.95),
+          0 0 20px rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 16px 28px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        max-width: 1400px;
+        width: 90%;
+        z-index: 1000;
+        pointer-events: auto;
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.5;
+        color: #ededed;
+        transition:
+          opacity 0.25s ease,
+          transform 0.25s ease;
+        backdrop-filter: blur(16px);
+      }
+      .presenter-cue.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, 20px);
+      }
+      .cue-badge {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        flex-shrink: 0;
+        margin-top: 2px;
+        font-family: var(--font-mono);
+      }
+      .cue-slide-badge {
+        background: #ffffff;
+        color: #000000;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-weight: 800;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        flex-shrink: 0;
+        margin-top: 2px;
+        font-family: var(--font-mono);
+      }
+      .cue-text {
+        color: #ededed;
+        font-size: 15px;
+        flex-grow: 1;
+      }
+      .cue-text strong {
+        color: #ffffff;
+      }
+      .cue-shortcut {
+        color: var(--text-muted);
+        font-size: 11px;
+        border-left: 1px solid rgba(255, 255, 255, 0.15);
+        padding-left: 14px;
+        flex-shrink: 0;
+        font-family: var(--font-mono);
+        margin-top: 2px;
+      }
+
+      .hand-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 40px;
+        padding: 10px 22px;
+        font-family: var(--font-mono);
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        color: #ffffff;
+        margin-bottom: 24px;
+      }
+
+      .meme-card {
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow:
+          0 24px 60px rgba(0, 0, 0, 0.7),
+          0 0 30px rgba(255, 255, 255, 0.05);
+        background: #0d0d0f;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.4s var(--fuji-ease);
+      }
+
+      .text-highlight {
+        display: inline-block;
+        position: relative;
+        padding: 2px 10px;
+        color: #ffffff;
+        -webkit-text-fill-color: #ffffff;
+        border-radius: 6px;
+        transition: color 0.3s ease 0.4s;
+        z-index: 1;
+      }
+
+      .text-highlight::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        background: #f5ee38;
+        border-radius: 6px;
+        z-index: -1;
+        box-shadow: 0 0 25px rgba(245, 238, 56, 0.45);
+        transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+      }
+
+      .slide.active .text-highlight {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+        font-weight: 700;
+      }
+
+      .slide.active .text-highlight::before {
+        width: 100%;
+      }
+
+      .text-underline {
+        display: inline-block;
+        position: relative;
+        color: #ffffff;
+        -webkit-text-fill-color: #ffffff;
+      }
+
+      .text-underline::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 0%;
+        height: 6px;
+        background: #ffffff;
+        border-radius: 3px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        transition: width 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+      }
+
+      .slide.active .text-underline::after {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="deck-viewport">
+      <main class="deck-stage" id="deckStage">
+        <!-- ==========================================
+                 SLIDE 1: THE HOOK
+                 ========================================== -->
+        <section
+          class="slide active"
+          data-slide="1"
+          data-cue="<strong>THE HOOK (PUP REALITY):</strong><br>• Daming familiar faces dito!<br>• Ask: Sino nakakita nitong DBM budget cut news kay Rep. Elijah San Fernando?<br>• Absurd reality: Ketchup bottle as tabo (3rd & 1st floor CEA CR)<br>• Electric fan: Umiikot yung stand pero stationary yung elesi<br>• Core message: Iba ang danas ng PUPian — that constraint is what makes us relentlessly creative"
+        >
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 80px;
+              width: 1440px;
+              max-width: 100%;
+            "
+          >
+            <!-- Meme Image Card -->
+            <div
+              class="meme-card reveal delay-1"
+              style="width: 440px; height: 740px; flex-shrink: 0"
+            >
+              <img
+                src="memes/slide1.png"
+                alt="Meme"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  object-position: center top;
+                "
+              />
+            </div>
+
+            <!-- Clean Question -->
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+                max-width: 860px;
+              "
+            >
+              <h1
+                class="story-statement reveal delay-2"
+                style="
+                  font-size: 88px;
+                  text-align: left;
+                  line-height: 1.15;
+                  margin: 0;
+                  max-width: 820px;
+                "
+              >
+                Who has seen this in the news?
+              </h1>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 2: THE EXCUSE
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="2"
+          data-cue="<strong>THE EXCUSE & THE MISSION:</strong><br>• The excuse: <em>&quot;We don't have the budget&quot;</em><br>• Reality: Budget never stopped us from launching national orgs & 1,000+ attendee events<br>• We pull this off not because mayaman tayo (diyos ko po!) — but through volunteer grit & creativity<br>• Passing the torch: Dati members & volunteers lang kayo; ngayon kayo na ang tagapagmana<br>• Goal: I-impart ang mga dakilang pinagbabawal na technique!"
+        >
+          <div class="story-container">
+            <p
+              class="reveal delay-1"
+              style="
+                font-family: var(--font-mono);
+                font-size: 28px;
+                font-weight: 500;
+                color: var(--text-secondary);
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                margin-bottom: 28px;
+              "
+            >
+              The easiest excuse in leadership is:
+            </p>
+            <h2
+              class="reveal delay-2"
+              style="
+                font-family: var(--font-display);
+                font-size: 96px;
+                font-weight: 800;
+                letter-spacing: -0.04em;
+                color: #ffffff;
+                text-decoration: underline;
+                text-decoration-color: rgba(255, 255, 255, 0.4);
+                text-underline-offset: 14px;
+                margin: 0;
+                line-height: 1.1;
+              "
+            >
+              We don't have the budget.
+            </h2>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 3: THE MINDSET
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="3"
+          data-cue="<strong>THE MINDSET (CONSTRAINTS):</strong><br>• As computer engineers: Throwing money at problems isn't engineering<br>• Research: <em>Creativity from Constraints</em> — breakthroughs come from difficulties, not unlimited cash<br>• Wright Brothers: NYT said it would take 100 years to fly; two bicycle mechanics built it with spare parts in a garage<br>• Steve Jobs: Shaving 10s off Mac boot time saved 4.4M hours of human life<br>• Budget buys convenience; constraints drive innovation"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="font-size: 72px; max-width: 1260px; line-height: 1.15"
+            >
+              Throwing money at a problem isn't engineering.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="
+                font-size: 32px;
+                margin: 24px 0 32px 0;
+                max-width: 1100px;
+                color: #e0e0e0;
+              "
+            >
+              Budget buys convenience. Constraints force innovation.
+            </p>
+            <div
+              class="meme-card reveal delay-3"
+              style="width: 1100px; height: 420px; overflow: hidden"
+            >
+              <img
+                src="memes/slide3.png"
+                alt="Creativity from constraints: Theory and applications to education"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  object-position: center top;
+                "
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 4: THE EVENT
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="4"
+          data-cue="<strong>THE CASE STUDY (CTF 3.0):</strong><br>• Cisco NetConnect Onboarding case study: Paano natin inabuso ang free tier<br>• 3rd Edition of our Capture The Flag (CTF) — now expanding to Australia!<br>• Hundreds of hackers: CIT Cebu (2nd place), PUP Santa Maria (Champions)<br>• Enterprise-scale requirements with ₱0.00 cloud infrastructure budget"
+        >
+          <div class="story-container">
+            <h2 class="story-statement reveal delay-1">
+              Hosting our 3rd Capture The Flag. Now expanding to Australia.
+            </h2>
+            <p class="story-sub reveal delay-2">
+              Hundreds of hackers across Luzon, Visayas, Mindanao—and now international. Enterprise scale for ₱0.00.
+            </p>
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1200px; height: 380px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1200 380" width="100%" height="380">
+                <defs>
+                  <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18" />
+                    <stop offset="60%" stop-color="#ffffff" stop-opacity="0.04" />
+                    <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+                  </radialGradient>
+                  <filter id="glowNode" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- Subtle background mesh glow -->
+                <circle cx="600" cy="190" r="220" fill="url(#centerGlow)" />
+
+                <!-- Network Coordinate Marks -->
+                <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
+                  <line x1="200" y1="190" x2="1000" y2="190" stroke-dasharray="4 8" />
+                  <line x1="600" y1="40" x2="600" y2="340" stroke-dasharray="4 8" />
+                  <circle cx="600" cy="190" r="280" fill="none" stroke-dasharray="2 10" />
+                  <circle cx="600" cy="190" r="160" fill="none" stroke-dasharray="3 7" stroke="rgba(255,255,255,0.08)" />
+                </g>
+
+                <!-- Outer Mesh Inter-Node Links -->
+                <line x1="390" y1="110" x2="500" y2="50" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="500" y1="50" x2="700" y2="50" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="700" y1="50" x2="810" y2="110" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="810" y1="110" x2="870" y2="200" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="870" y1="200" x2="780" y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="780" y1="300" x2="600" y2="340" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="600" y1="340" x2="420" y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="420" y1="300" x2="330" y2="200" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+                <line x1="330" y1="200" x2="390" y2="110" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+
+                <!-- Cross-Mesh Redundant Ring Connections -->
+                <line x1="390" y1="110" x2="520" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="500" y1="50" x2="520" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="500" y1="50" x2="680" y2="130" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
+                <line x1="700" y1="50" x2="680" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="810" y1="110" x2="680" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="810" y1="110" x2="750" y2="210" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="870" y1="200" x2="750" y2="210" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="780" y1="300" x2="700" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="600" y1="340" x2="700" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="600" y1="340" x2="500" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="420" y1="300" x2="500" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="330" y1="200" x2="450" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="390" y1="110" x2="450" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="450" y1="200" x2="500" y2="260" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
+                <line x1="750" y1="210" x2="700" y2="260" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
+                <line x1="520" y1="130" x2="680" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+                <line x1="500" y1="260" x2="700" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
+
+                <!-- Direct Spoke Backbone Links to Central Hub -->
+                <line x1="520" y1="130" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
+                <line x1="680" y1="130" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
+                <line x1="750" y1="210" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
+                <line x1="700" y1="260" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
+                <line x1="500" y1="260" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
+                <line x1="450" y1="200" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
+
+                <!-- Network Packets In Flight -->
+                <circle r="4" class="packet-dot">
+                  <animateMotion path="M 330,200 L 450,200 L 600,190" dur="2s" repeatCount="indefinite" />
+                </circle>
+                <circle r="4" class="packet-dot">
+                  <animateMotion path="M 870,200 L 750,210 L 600,190" dur="1.8s" repeatCount="indefinite" />
+                </circle>
+                <circle r="4" class="packet-dot">
+                  <animateMotion path="M 500,50 L 520,130 L 600,190" dur="1.7s" repeatCount="indefinite" />
+                </circle>
+                <circle r="4" class="packet-dot">
+                  <animateMotion path="M 780,300 L 700,260 L 600,190" dur="2.3s" repeatCount="indefinite" />
+                </circle>
+
+                <!-- Outer Competitor Team Nodes (Circular, monochrome with varied sizes) -->
+                <!-- Hull Nodes -->
+                <circle
+                  cx="330"
+                  cy="200"
+                  r="18"
+                  fill="#141414"
+                  stroke="#ffffff"
+                  stroke-width="1.8"
+                />
+                <circle
+                  cx="390"
+                  cy="110"
+                  r="14"
+                  fill="#0d0d0f"
+                  stroke="rgba(255,255,255,0.4)"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="500"
+                  cy="50"
+                  r="20"
+                  fill="#141414"
+                  stroke="#ffffff"
+                  stroke-width="1.8"
+                />
+                <circle
+                  cx="700"
+                  cy="50"
+                  r="15"
+                  fill="#0d0d0f"
+                  stroke="rgba(255,255,255,0.4)"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="810"
+                  cy="110"
+                  r="19"
+                  fill="#141414"
+                  stroke="#ffffff"
+                  stroke-width="1.8"
+                />
+                <circle
+                  cx="870"
+                  cy="200"
+                  r="22"
+                  fill="#141414"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="780"
+                  cy="300"
+                  r="17"
+                  fill="#0d0d0f"
+                  stroke="rgba(255,255,255,0.5)"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="600"
+                  cy="340"
+                  r="21"
+                  fill="#141414"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                />
+                <circle
+                  cx="420"
+                  cy="300"
+                  r="16"
+                  fill="#0d0d0f"
+                  stroke="rgba(255,255,255,0.4)"
+                  stroke-width="1.5"
+                />
+
+                <!-- Mid-cluster Inner Nodes -->
+                <circle
+                  cx="450"
+                  cy="200"
+                  r="13"
+                  fill="#181818"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="520"
+                  cy="130"
+                  r="16"
+                  fill="#181818"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="680"
+                  cy="130"
+                  r="14"
+                  fill="#181818"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="750"
+                  cy="210"
+                  r="15"
+                  fill="#181818"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="700"
+                  cy="260"
+                  r="12"
+                  fill="#181818"
+                  stroke="rgba(255,255,255,0.6)"
+                  stroke-width="1.2"
+                />
+                <circle
+                  cx="500"
+                  cy="260"
+                  r="14"
+                  fill="#181818"
+                  stroke="rgba(255,255,255,0.6)"
+                  stroke-width="1.2"
+                />
+
+                <!-- Focal Center: Capture The Flag Platform Hub -->
+                <circle
+                  cx="600"
+                  cy="190"
+                  r="48"
+                  fill="#0c0c0c"
+                  stroke="#ffffff"
+                  stroke-width="2.5"
+                  filter="drop-shadow(0 0 25px rgba(255, 255, 255, 0.4))"
+                />
+                <circle
+                  cx="600"
+                  cy="190"
+                  r="38"
+                  fill="none"
+                  stroke="rgba(255, 255, 255, 0.35)"
+                  stroke-width="1.2"
+                  stroke-dasharray="4 4"
+                />
+
+                <!-- Center Title Pill -->
+                <rect
+                  x="455"
+                  y="173"
+                  width="290"
+                  height="34"
+                  rx="7"
+                  fill="#000000"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                />
+                <text
+                  x="600"
+                  y="195"
+                  font-family="var(--font-mono)"
+                  font-size="12"
+                  font-weight="800"
+                  fill="#ffffff"
+                  letter-spacing="0.08em"
+                  text-anchor="middle"
+                >
+                  CAPTURE THE FLAG PLATFORM
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 5: THE FINANCIAL REALITY
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="5"
+          data-cue="<strong>BUDGET REALITY:</strong><br>• Secured sponsors like PLDT Innolab<br>• Gem (CTF head) knows: 100% of funds went straight to cash prizes, participant kits, & operations<br>• Exactly ₱0.00 allocated for cloud hosting<br>• As engineers: Needed a zero-cost architecture"
+        >
+          <div class="story-container">
+            <h2 class="story-statement reveal delay-1">
+              Every sponsor peso had to go to prizes and operations.
+            </h2>
+            <p class="story-sub reveal delay-2" style="margin-bottom: 24px">
+              We secured major sponsors like PLDT, but prize pools and logistics
+              eat the budget. Cloud infrastructure had to cost zero.
+            </p>
+            <div
+              class="meme-card reveal delay-3"
+              style="width: 1040px; height: 460px; overflow: hidden"
+            >
+              <img
+                src="memes/slide5.jpg"
+                alt="PLDT Innolab Sponsor Event"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  object-position: center 35%;
+                "
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 6: QUESTION 1: WHO REMEMBERS DOTA IN INTERNET CAFES?
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="6"
+          data-cue="<strong>AUDIENCE HOOK: DOTA:</strong><br>• Show of hands: Sino nakapaglaro ng Dota sa comshop?<br>• Iconic trash talk: <em>&quot;Pinabili lang kita ng itlog!&quot;</em> & shouting across aisles<br>• Blue ethernet cables plugged into one unmanaged switch<br>• Zero internet needed — local packets stayed in the room"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              Who remembers playing Dota in internet cafes?
+            </h2>
+            <div
+              class="meme-card reveal delay-2"
+              style="
+                max-height: 520px;
+                width: auto;
+                overflow: hidden;
+                border-radius: 12px;
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+              "
+            >
+              <img
+                src="memes/dota_trash_talk.jpg"
+                alt="Pinabili lang kita ng itlog - Dota Internet Cafe Trash Talk"
+                style="max-height: 520px; width: auto; object-fit: contain"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 7: QUESTION 2: DO YOU PLAY MINECRAFT?
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="7"
+          data-cue="<strong>AUDIENCE HOOK: MINECRAFT:</strong><br>• Show of hands: Sino nakapaglaro ng Minecraft?<br>• Look at this photo: Kami nila Jared (CEO), Deadfall, Silverchan, the two Carls, at ako — naglalaro sa bahay!<br>• Universal urge: Wanting everyone to play together across separate computers"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              Do you play Minecraft?
+            </h2>
+            <div
+              class="meme-card reveal delay-2"
+              style="
+                max-height: 520px;
+                width: auto;
+                overflow: hidden;
+                border-radius: 12px;
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+              "
+            >
+              <img
+                src="memes/minecraft.png"
+                alt="Minecraft multiplayer group adventure in dungeon"
+                style="max-height: 520px; width: auto; object-fit: contain"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 8: QUESTION 3: WHO HAS SETUP A MINECRAFT SERVER?
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="8"
+          data-cue="<strong>THE GATEWAY DRUG (SERVERS):</strong><br>• Sino dito nakapag-set up na ng sariling Minecraft server? (Kahit Aternos lang!)<br>• Downloaded <code>server.jar</code>, agreed to EULA, typed <code>java -jar</code>, <code>localhost:25565</code><br>• Pure magic<br>• That is the true gateway drug to home labbing, self-hosting, and systems engineering"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 84px;
+                max-width: 1250px;
+                line-height: 1.15;
+                margin-bottom: 24px;
+              "
+            >
+              Who has set up their own Minecraft server?
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="
+                font-size: 32px;
+                max-width: 1050px;
+                color: var(--text-secondary);
+              "
+            >
+              Minecraft servers are the true gateway drug to home labbing and
+              self-hosting.
+            </p>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 9: THE PARALLEL: MINECRAFT TO CTF
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="9"
+          data-cue="<strong>THE CORE PARALLEL (LOCAL NETWORK):</strong><br>• Look at this tweet: Arun builds 3 web apps with Claude Code and shares <code>localhost:3000</code>!<br>• Alam nating lahat na hindi gagana yan kapag hindi same network!<br>• That is the exact challenge of hosting our CTF: Paano aabutin ng local machine mo ang hackers from Luzon, Visayas, Mindanao, and Australia?"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 72px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 16px;
+              "
+            >
+              How does localhost reach Luzon, Visayas, Mindanao, and Australia?
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="
+                font-size: 26px;
+                max-width: 1100px;
+                margin-bottom: 24px;
+                color: var(--text-secondary);
+              "
+            >
+              Arun built 3 apps on localhost. Connecting to your PC from outside is the exact same networking challenge as hosting a CTF.
+            </p>
+            <div
+              class="meme-card reveal delay-3"
+              style="
+                max-height: 480px;
+                width: auto;
+                overflow: hidden;
+                border-radius: 12px;
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+              "
+            >
+              <img
+                src="memes/ctf_minecraft_parallel.jpg"
+                alt="Arun Claude Code localhost tweet"
+                style="max-height: 480px; width: auto; object-fit: contain"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 10: THE ANCIENT WAY: PORT FORWARDING
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="10"
+          data-cue="<strong>PORT FORWARDING (ANCIENT ERA):</strong><br>• Ancient times: ISPs gave home routers real public IPv4 addresses<br>• Log into <code>192.168.1.1</code> and tell router: route port 25565/80 to bedroom PC<br>• Seamless, direct incoming path straight from the public internet"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 78px;
+                max-width: 1300px;
+                line-height: 1.18;
+                margin-bottom: 36px;
+              "
+            >
+              In ancient times, we just <span class="text-highlight">port-forwarded</span>.
+            </h2>
+            <div
+              class="diagram-stage reveal delay-2"
+              style="width: 1100px; height: 260px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1100 240" width="100%" height="240">
+                <!-- 1. Public Internet -->
+                <rect
+                  x="60"
+                  y="55"
+                  width="270"
+                  height="130"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="195" y="128" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
+                  PUBLIC INTERNET
+                </text>
+
+                <!-- Flow Line: Internet -> Router -->
+                <line
+                  x1="330"
+                  y1="120"
+                  x2="415"
+                  y2="120"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 330,120 L 415,120"
+                    dur="1.4s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- 2. Home Router (Highlighted) -->
+                <rect
+                  x="415"
+                  y="50"
+                  width="270"
+                  height="140"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="550" y="128" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
+                  HOME ROUTER
+                </text>
+
+                <!-- Flow Line: Router -> PC -->
+                <line
+                  x1="685"
+                  y1="120"
+                  x2="770"
+                  y2="120"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 685,120 L 770,120"
+                    dur="1.4s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- 3. Your PC -->
+                <rect
+                  x="770"
+                  y="55"
+                  width="270"
+                  height="130"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="905" y="128" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
+                  YOUR PC
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 11: THE BARRIER: CGNAT
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="11"
+          data-cue="<strong>WHY IT BROKE: CGNAT:</strong><br>• IPv4 ran out → ISPs deployed Carrier-Grade NAT (CGNAT) as a cheap workaround<br>• Thousands of households bundled behind a single public IP<br>• Outbound requests work fine; inbound traffic is blocked by the CGNAT gateway<br>• Cannot port-forward unless you pay for an expensive business plan (pera na naman!)"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 72px;
+                max-width: 1300px;
+                line-height: 1.18;
+                margin-bottom: 20px;
+              "
+            >
+              CGNAT is the ISP's cheap way to provide internet.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+            >
+              Public IPv4 addresses are expensive. Thousands of homes share just <span class="text-highlight">one public IP</span>—making inbound port forwarding impossible.
+            </p>
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1140px; height: 280px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1140 260" width="100%" height="260">
+                <!-- 1. Left: Public Internet -->
+                <rect
+                  x="50"
+                  y="65"
+                  width="230"
+                  height="130"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="165" y="138" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff">
+                  PUBLIC INTERNET
+                </text>
+
+                <!-- Inbound attack line dropped at CGNAT -->
+                <line
+                  x1="280"
+                  y1="130"
+                  x2="400"
+                  y2="130"
+                  stroke="rgba(255,80,80,0.6)"
+                  stroke-width="2.5"
+                  stroke-dasharray="6 6"
+                />
+                <circle r="4.5" class="packet-dot-danger">
+                  <animateMotion
+                    path="M 280,130 L 390,130"
+                    dur="1.3s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- Block indicator -->
+                <circle cx="400" cy="130" r="18" fill="#141414" stroke="#ff4d4d" stroke-width="2" />
+                <text x="400" y="137" fill="#ff4d4d" font-family="var(--font-mono)" font-size="16" font-weight="900" text-anchor="middle">✕</text>
+
+                <!-- 2. Middle: The Shared Single Public IP / CGNAT Gateway -->
+                <rect
+                  x="440"
+                  y="45"
+                  width="270"
+                  height="170"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="575" y="105" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff">
+                  ISP CGNAT GATEWAY
+                </text>
+                <line
+                  x1="465"
+                  y1="125"
+                  x2="685"
+                  y2="125"
+                  stroke="rgba(255,255,255,0.15)"
+                />
+                <text x="575" y="152" class="diagram-txt-accent" font-size="14" font-weight="800">
+                  1 SHARED PUBLIC IP
+                </text>
+                <text x="575" y="185" fill="#ff6b6b" font-family="var(--font-mono)" font-size="13" font-weight="800" text-anchor="middle">
+                  INBOUND BLOCKED
+                </text>
+
+                <!-- Fan-out lines from 1 IP to Multiple Connected Homes -->
+                <line x1="710" y1="105" x2="840" y2="55" class="cluster-line" stroke-width="2" />
+                <line x1="710" y1="130" x2="840" y2="130" class="cluster-line" stroke-width="2" />
+                <line x1="710" y1="155" x2="840" y2="205" class="cluster-line" stroke-width="2" />
+
+                <!-- 3. Right: Multiple Subscribers Sharing the Same IP -->
+                <!-- Home A -->
+                <rect x="840" y="30" width="250" height="52" rx="10" class="diagram-box" />
+                <text x="965" y="62" class="diagram-txt-title" font-size="15" font-weight="700">YOUR BEDROOM</text>
+
+                <!-- Home B -->
+                <rect x="840" y="104" width="250" height="52" rx="10" class="diagram-box" />
+                <text x="965" y="136" class="diagram-txt-title" font-size="15" font-weight="700">NEIGHBOR'S HOUSE</text>
+
+                <!-- Home C -->
+                <rect x="840" y="178" width="250" height="52" rx="10" class="diagram-box" />
+                <text x="965" y="210" class="diagram-txt-title" font-size="15" font-weight="700">1,000+ OTHER HOMES</text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 12: THE INSPIRATION: SOFTWARE ENGINEERING & THE DAY JOB
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="12"
+          data-cue="<strong>DAY JOB INSPIRATION:</strong><br>• Software engineer day job: Dealing with enterprise infrastructure daily (mamaya magco-configure na naman ako!)<br>• Companies spend millions/billions to save developer hours and ensure zero downtime<br>• Worth it for enterprise velocity<br>• The core question: Tayo na walang kapera-pera, how do we borrow those exact enterprise abstractions for ₱0.00?"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="max-width: 1250px"
+            >
+              In my day job as a software engineer, I deal with enterprise
+              infrastructure every single day.
+            </h2>
+            <p class="story-sub reveal delay-2" style="margin-bottom: 24px">
+              I know firsthand that enterprise cloud deployments are among the
+              most expensive line items in tech.
+            </p>
+            <div
+              class="meme-card reveal delay-3"
+              style="max-height: 480px; width: auto; overflow: hidden"
+            >
+              <img
+                src="memes/slide6_devops.jpg"
+                alt="Devops teams to finance after misconfiguring cloud needs"
+                style="max-height: 480px; width: auto; object-fit: contain"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 13: THE EASY WAY VS CREATIVE SOLUTION
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="13"
+          data-cue="<strong>EASY WAY VS CREATIVE WAY:</strong><br>• The easy way: Swipe a corporate card, spin up huge EC2 fleets on AWS, pay thousands of dollars<br>• Scaling for Australia & nationwide: We chose a creative solution<br>• Zero budget isn't a roadblock — it's an invitation to engineer"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 84px;
+                max-width: 1300px;
+                line-height: 1.15;
+              "
+            >
+              The easy way is to just pay AWS.<br />
+              We chose a <span class="text-underline">more creative solution</span>.
+            </h2>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 14: THE REPLICATION INSIGHT
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="14"
+          data-cue="<strong>EXPENSIVE ≠ IRREPRODUCIBLE:</strong><br>• Expensive doesn't mean hindi natin kayang kopyahin<br>• Enterprise cloud looks intimidating due to price tags, but behind the scenes it's just networking protocols, OS primitives, and distributed systems<br>• Understand the underlying abstractions → replicate it for free"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="font-size: 84px; max-width: 1300px; line-height: 1.15"
+            >
+              Expensive doesn't mean irreproducible.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="
+                font-size: 34px;
+                margin-top: 36px;
+                max-width: 1100px;
+                color: #e0e0e0;
+              "
+            >
+              You don't need cloud vendor credits to run enterprise
+              architecture. You just need to recreate the same abstractions with
+              what you have.
+            </p>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 15: THE INSPIRATION: DISTRIBUTED COMPUTING
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="15"
+          data-cue="<strong>DISTRIBUTED COMPUTING:</strong><br>• Enterprise scaling model: Distributed Computing<br>• Solves the weak PC problem: When you combine many weak PCs together, they become a supercomputer!<br>• Separate concerns: 1 Master Node (coordinator) + fleet of Worker Nodes (executors)<br>• Industry uses Kubernetes; our adaptation: Cloud coordinator + dorm computers as workers"
+        >
+          <div class="story-container">
+            <h2 class="story-statement reveal delay-1">
+              At its core, this is just distributed computing.
+            </h2>
+            <p class="story-sub reveal delay-2">
+              Combine weak PCs into a supercomputer. 1 machine coordinates, many machines execute.
+            </p>
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1200px; height: 320px; margin-top: 20px"
+            >
+              <svg viewBox="0 0 1200 310" width="100%" height="310">
+                <!-- Connecting lines from master to 3 nodes -->
+                <line
+                  x1="390"
+                  y1="155"
+                  x2="720"
+                  y2="60"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <line
+                  x1="390"
+                  y1="155"
+                  x2="720"
+                  y2="155"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <line
+                  x1="390"
+                  y1="155"
+                  x2="720"
+                  y2="250"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+
+                <!-- Packet animations -->
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 390,155 L 720,60"
+                    dur="1.7s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 390,155 L 720,155"
+                    dur="1.3s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 390,155 L 720,250"
+                    dur="2.0s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- Master Node Box (Clean & Bold) -->
+                <rect
+                  x="80"
+                  y="85"
+                  width="310"
+                  height="140"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="235" y="163" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
+                  MASTER NODE
+                </text>
+
+                <!-- Worker Node 01 (Clean & Bold) -->
+                <rect
+                  x="720"
+                  y="30"
+                  width="400"
+                  height="64"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text x="920" y="70" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
+                  WORKER NODE 01
+                </text>
+
+                <!-- Worker Node 02 (Clean & Bold) -->
+                <rect
+                  x="720"
+                  y="123"
+                  width="400"
+                  height="64"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text x="920" y="163" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
+                  WORKER NODE 02
+                </text>
+
+                <!-- Worker Node 03 (Clean & Bold) -->
+                <rect
+                  x="720"
+                  y="218"
+                  width="400"
+                  height="64"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text x="920" y="258" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
+                  WORKER NODE 03
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 16: THE NETWORKING SOLUTION: DIRECTION INVERSION
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="16"
+          data-cue="<strong>DIRECTION INVERSION (TUNNELING):</strong><br>• How tunneling bypasses CGNAT and port forwarding<br>• Simply connect two networks directly together: Home local network + AWS network<br>• Home PC dials <em>OUTWARD</em> to a public server and keeps the tunnel open<br>• Outside users connect to public server, which routes down the established tunnel"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              How tunneling bypasses port-forwarding.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+            >
+              Instead of waiting for incoming traffic, your PC connects <span class="text-highlight">outward to a public server</span>.
+            </p>
+            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
+              <svg viewBox="0 0 1160 250" width="100%" height="250">
+                <!-- 1. Outside Competitor / Public Internet -->
+                <rect
+                  x="40"
+                  y="60"
+                  width="220"
+                  height="130"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="150" y="133" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
+                  OUTSIDE USER
+                </text>
+
+                <!-- Inbound Connection: User -> Public Server -->
+                <line
+                  x1="260"
+                  y1="125"
+                  x2="380"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 260,125 L 380,125"
+                    dur="1.4s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- 2. Public Server (Meeting Point) -->
+                <rect
+                  x="380"
+                  y="50"
+                  width="260"
+                  height="150"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="510" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff">
+                  PUBLIC SERVER
+                </text>
+                <text x="510" y="145" class="diagram-txt-accent" font-size="12" font-weight="700">
+                  MEETING POINT
+                </text>
+
+                <!-- 3. CGNAT / NAT Barrier (Bypassed) -->
+                <line
+                  x1="640"
+                  y1="125"
+                  x2="880"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="3"
+                />
+
+                <!-- Outbound packet moving from Home PC -> Public Server -->
+                <circle r="5" class="packet-dot">
+                  <animateMotion
+                    path="M 880,125 L 640,125"
+                    dur="1.6s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- CGNAT Barrier Box with bypass label -->
+                <rect
+                  x="700"
+                  y="45"
+                  width="120"
+                  height="160"
+                  rx="10"
+                  class="diagram-box-barrier"
+                />
+                <text x="760" y="90" fill="#ff6b6b" font-family="var(--font-mono)" font-size="12" font-weight="800" text-anchor="middle">
+                  CGNAT
+                </text>
+                <text x="760" y="115" fill="#888888" font-family="var(--font-mono)" font-size="9" text-anchor="middle">
+                  BLOCKS INBOUND
+                </text>
+                <line x1="715" y1="125" x2="805" y2="125" stroke="rgba(255,255,255,0.2)" />
+                <text x="760" y="150" fill="#ffffff" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle">
+                  OUTBOUND
+                </text>
+                <text x="760" y="165" fill="#ffffff" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle">
+                  TUNNEL ➔
+                </text>
+                <text x="760" y="188" fill="#ffffff" font-family="var(--font-mono)" font-size="8" text-anchor="middle">
+                  [ALLOWED]
+                </text>
+
+                <!-- 4. Your PC / Worker Node -->
+                <rect
+                  x="880"
+                  y="60"
+                  width="240"
+                  height="130"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="1000" y="133" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
+                  YOUR PC
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 17: CTF APPLICATION 1: AWS FREE TIER + TAILSCALE
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="17"
+          data-cue="<strong>AWS FREE TIER + TAILSCALE:</strong><br>• Meeting point: AWS Free Tier EC2 micro-instance (static public IP for ₱0.00)<br>• Private network overlay: Tailscale (WireGuard mesh)<br>• Officer machines dial out to AWS, creating an encrypted point-to-point mesh"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              AWS Free Tier + Tailscale.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+            >
+              AWS gives the public front door. <span class="text-highlight">Tailscale connects the private mesh</span>.
+            </p>
+            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
+              <svg viewBox="0 0 1160 250" width="100%" height="250">
+                <!-- Conduit Tube for Tailscale -->
+                <rect
+                  x="330"
+                  y="90"
+                  width="480"
+                  height="70"
+                  rx="12"
+                  fill="rgba(255,255,255,0.03)"
+                  stroke="rgba(255,255,255,0.2)"
+                  stroke-width="1.5"
+                />
+                <line
+                  x1="330"
+                  y1="125"
+                  x2="810"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+
+                <!-- Bidirectional packet stream -->
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 800,125 L 340,125"
+                    dur="1.8s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 340,125 L 800,125"
+                    dur="1.8s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- Conduit Label -->
+                <text x="570" y="118" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  TAILSCALE MESH
+                </text>
+                <text x="570" y="142" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
+                  ENCRYPTED OVERLAY ➔
+                </text>
+
+                <!-- Left: AWS (Public Entry) -->
+                <rect
+                  x="50"
+                  y="55"
+                  width="280"
+                  height="140"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="190" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  AWS FREE TIER
+                </text>
+                <text x="190" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
+                  PUBLIC IP // ₱0.00
+                </text>
+
+                <!-- Right: Student Rig (Compute) -->
+                <rect
+                  x="810"
+                  y="55"
+                  width="300"
+                  height="140"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="960" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  STUDENT RIG
+                </text>
+                <text x="960" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
+                  OUTBOUND TUNNEL
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 18: CTF APPLICATION 2: MEMBER GAMING RIGS
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="18"
+          data-cue="<strong>OFFICER GAMING RIGS AS NODES:</strong><br>• Replicating huge EC2 fleets on AWS costs thousands of dollars<br>• Nautakan natin si AWS: Pooled student gaming rigs & laptops sitting idle across dorms!<br>• 24 CPU cores & 80GB RAM across 3 machines — total compute bill: ₱0.00"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              Officer gaming rigs as worker nodes.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+            >
+              Student hardware = <span class="text-highlight">24 CPU cores & 80GB RAM for ₱0.00</span>.
+            </p>
+            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
+              <svg viewBox="0 0 1160 250" width="100%" height="250">
+                <!-- 3 Member Hardware Nodes (Gaming PCs & Laptops) -->
+                <rect
+                  x="80"
+                  y="15"
+                  width="300"
+                  height="65"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text x="230" y="42" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  GAMING PC (RTX 4070)
+                </text>
+                <text x="230" y="63" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
+                  8 CORES // 32GB RAM
+                </text>
+
+                <rect
+                  x="80"
+                  y="92"
+                  width="300"
+                  height="65"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text x="230" y="119" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  GAMING LAPTOP (RYZEN 7)
+                </text>
+                <text x="230" y="140" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
+                  8 CORES // 16GB RAM
+                </text>
+
+                <rect
+                  x="80"
+                  y="170"
+                  width="300"
+                  height="65"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text x="230" y="197" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  GAMING PC (I7 DESKTOP)
+                </text>
+                <text x="230" y="218" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
+                  8 CORES // 32GB RAM
+                </text>
+
+                <!-- Converging Pool Lines -->
+                <line
+                  x1="380"
+                  y1="47"
+                  x2="640"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <line
+                  x1="380"
+                  y1="125"
+                  x2="640"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <line
+                  x1="380"
+                  y1="202"
+                  x2="640"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+
+                <circle r="4" class="packet-dot">
+                  <animateMotion
+                    path="M 380,47 L 640,125"
+                    dur="1.6s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4" class="packet-dot">
+                  <animateMotion
+                    path="M 380,125 L 640,125"
+                    dur="1.6s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4" class="packet-dot">
+                  <animateMotion
+                    path="M 380,202 L 640,125"
+                    dur="1.6s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- Aggregate Pool Box (Focal) -->
+                <rect
+                  x="640"
+                  y="55"
+                  width="440"
+                  height="140"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="860" y="112" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  24 CORES // 80GB RAM
+                </text>
+                <text x="860" y="148" class="diagram-txt-accent" font-size="15" font-weight="700" text-anchor="middle">
+                  ₱0.00 CLOUD BILL
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 19: CTF APPLICATION 3: INGRESS DISPATCH ROUTING
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="19"
+          data-cue="<strong>ENTERPRISE HYBRID CLOUD:</strong><br>• Competitors only ever hit the single public AWS IP<br>• Small AWS instance acts as ingress router: maps ports and dispatches over Tailscale to bedroom nodes<br>• Enterprise pattern: Let AWS handle public edge, DDoS, and firewall protection for free; offload heavy compute to private nodes"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              Transparent cluster routing.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+            >
+              The Enterprise Hybrid Cloud pattern. AWS handles edge protection; student rigs handle the compute.
+            </p>
+            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
+              <svg viewBox="0 0 1160 250" width="100%" height="250">
+                <!-- Step 1: Competitor Connection -->
+                <rect
+                  x="50"
+                  y="55"
+                  width="280"
+                  height="140"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="190" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  COMPETITOR
+                </text>
+                <text x="190" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
+                  CONNECTS TO AWS
+                </text>
+
+                <!-- Hop 1 -->
+                <line
+                  x1="330"
+                  y1="125"
+                  x2="450"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 330,125 L 450,125"
+                    dur="1.2s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- Step 2: AWS Ingress Router -->
+                <rect
+                  x="450"
+                  y="55"
+                  width="280"
+                  height="140"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="590" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  AWS INGRESS
+                </text>
+                <text x="590" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
+                  FORWARDS TRAFFIC ➔
+                </text>
+
+                <!-- Hop 2 -->
+                <line
+                  x1="730"
+                  y1="125"
+                  x2="850"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 730,125 L 850,125"
+                    dur="1.2s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- Step 3: Targeted Container -->
+                <rect
+                  x="850"
+                  y="55"
+                  width="280"
+                  height="140"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text x="990" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  DORM CONTAINER
+                </text>
+                <text x="990" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
+                  EXECUTES CHALLENGE
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 20: CTF APPLICATION 4: HOST ISOLATION (PROXMOX & VMS)
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="20"
+          data-cue="<strong>3 LAYERS OF DEFENSE:</strong><br>• Paano mapoprotektahan ang volunteer machines?<br>• Layer 1: Tailscale VPN (Direct point-to-point tunnel, zero access to home LAN)<br>• Layer 2: Proxmox VM (Hardware virtualization boundary; Tailscale terminates inside VM, not host OS)<br>• Layer 3: Docker Swarm (Containerized disposable challenge sandbox)"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              3 layers of defense. Zero risk.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 26px;"
+            >
+              Tailscale VPN ➔ Proxmox VM ➔ Docker Swarm. <span class="text-highlight">Zero access to host PC or dorm Wi-Fi</span>.
+            </p>
+            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
+              <svg viewBox="0 0 1160 250" width="100%" height="250">
+                <!-- Layer 1: Physical Host PC -->
+                <rect
+                  x="50"
+                  y="15"
+                  width="1060"
+                  height="220"
+                  rx="14"
+                  class="diagram-box"
+                />
+                <text
+                  x="80"
+                  y="46"
+                  class="diagram-txt-title"
+                  font-size="15"
+                  font-weight="800"
+                  fill="#ffffff"
+                  text-anchor="start"
+                >
+                  LAYER 1: PHYSICAL HOST PC (WINDOWS / LINUX)
+                </text>
+                <text
+                  x="1080"
+                  y="46"
+                  fill="#888888"
+                  font-family="var(--font-mono)"
+                  font-size="12"
+                  font-weight="700"
+                  text-anchor="end"
+                >
+                  HOST FILES & DORM WI-FI QUARANTINED
+                </text>
+
+                <!-- Layer 2: Proxmox Isolated VM -->
+                <rect
+                  x="90"
+                  y="62"
+                  width="980"
+                  height="155"
+                  rx="12"
+                  class="diagram-box-highlight"
+                />
+                <text x="120" y="94" class="diagram-txt-title" font-size="15" font-weight="800" fill="#ffffff" text-anchor="start">
+                  LAYER 2: PROXMOX ISOLATED VM (TAILSCALE TERMINATES HERE)
+                </text>
+                <text x="1040" y="94" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="end">
+                  HARDWARE HYPERVISOR BOUNDARY
+                </text>
+
+                <!-- Layer 3: Docker Swarm Sandboxed Containers -->
+                <rect
+                  x="130"
+                  y="114"
+                  width="900"
+                  height="85"
+                  rx="10"
+                  fill="rgba(0, 0, 0, 0.6)"
+                  stroke="rgba(255, 255, 255, 0.4)"
+                  stroke-width="1.5"
+                />
+                <text x="580" y="152" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  LAYER 3: DOCKER SWARM CHALLENGE CONTAINERS
+                </text>
+                <text x="580" y="178" fill="#888888" font-family="var(--font-mono)" font-size="12" font-weight="700" text-anchor="middle">
+                  100% DISPOSABLE & QUARANTINED // ATTACKERS NEVER TOUCH VOLUNTEER MACHINES
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 21: THE RESULTS: ₱0.00
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="21"
+          data-cue="<strong>THE FINAL BILL: ₱0.00:</strong><br>• Spun down containers after competition and checked AWS billing console<br>• Total AWS infrastructure bill: <strong>₱0.00</strong><br>• 100% of sponsor funds stayed in winners' cash prizes and student kits"
+        >
+          <div class="story-container">
+            <div
+              style="
+                font-family: var(--font-mono);
+                font-size: 20px;
+                color: var(--text-muted);
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+              "
+              class="reveal delay-1"
+            >
+              FINAL INFRASTRUCTURE BILL
+            </div>
+            <div
+              class="story-stat reveal delay-2"
+              style="font-size: 220px; margin: 20px 0; font-weight: 900; letter-spacing: -0.06em; line-height: 1;"
+            >
+              ₱0.00
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 22: THE MORAL LESSON: WHY WE JOIN
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="22"
+          data-cue="<strong>THE MORAL LESSON: WHY WE JOIN:</strong><br>• Hindi lang ito networking concepts — we joined Cisco NetConnect to grow as people<br>• Growth requires friction, creativity, and solving hard challenges<br>• If we just buy our way out, we don't grow as leaders"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              We joined to grow as people.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+            >
+              Budget buys convenience. <span class="text-highlight">Constraints force real engineering</span>.
+            </p>
+            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
+              <svg viewBox="0 0 1160 250" width="100%" height="250">
+                <!-- Card 1: Easy Mode -->
+                <rect
+                  x="80"
+                  y="55"
+                  width="440"
+                  height="140"
+                  rx="14"
+                  class="diagram-box"
+                  opacity="0.6"
+                />
+                <text x="300" y="115" class="diagram-txt-title" font-size="20" font-weight="700" fill="#707070" text-anchor="middle">
+                  SWIPING A CARD
+                </text>
+                <text x="300" y="145" class="diagram-txt-sub" font-size="13" font-weight="500" fill="#555555" text-anchor="middle">
+                  BUYS CONVENIENCE
+                </text>
+
+                <!-- VS Badge -->
+                <circle
+                  cx="580"
+                  cy="125"
+                  r="24"
+                  fill="#141414"
+                  stroke="rgba(255,255,255,0.3)"
+                  stroke-width="1.5"
+                />
+                <text x="580" y="131" class="diagram-txt-title" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  VS
+                </text>
+
+                <!-- Card 2: Growth Mode -->
+                <rect
+                  x="640"
+                  y="55"
+                  width="440"
+                  height="140"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text x="860" y="115" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff" text-anchor="middle">
+                  OVERCOMING CONSTRAINTS
+                </text>
+                <text x="860" y="148" class="diagram-txt-accent" font-size="14" font-weight="700" text-anchor="middle">
+                  BUILDS TRUE MASTERY
+                </text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 23: THE LEADERSHIP PROTOCOL
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="23"
+          data-cue="<strong>THE LEADERSHIP STANDARD:</strong><br>• Rule starting today: <em>&quot;We don't have the budget&quot;</em> is officially off the table<br>• Our job isn't to buy solutions — it's to engineer them with imagination (SpongeBob meme)"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 76px;
+                max-width: 1300px;
+                line-height: 1.15;
+                margin-bottom: 20px;
+              "
+            >
+              "We don't have the budget" is off the table.
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 24px;"
+            >
+              Our job isn't to buy solutions. Our job is to engineer them.
+            </p>
+            <div
+              class="meme-card reveal delay-3"
+              style="max-height: 480px; width: auto; overflow: hidden;"
+            >
+              <img
+                src="memes/slide23_meme.jpg"
+                alt="SpongeBob Imagination"
+                style="
+                  max-height: 480px;
+                  width: auto;
+                  object-fit: contain;
+                  display: block;
+                "
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 24: THE CALL TO ACTION
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="24"
+          data-cue="<strong>CLOSING CHALLENGE:</strong><br>• Leaving the room with one driving challenge to everyone:<br>• <em>&quot;What are we building this year?&quot;</em>"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="
+                font-size: 88px;
+                max-width: 1300px;
+                line-height: 1.15;
+              "
+            >
+              What are we <span class="text-underline">building this year</span>?
+            </h2>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 25: Q&A + MANDATORY FOLLOW
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="25"
+          data-cue="<strong>Q&A & ATTENDANCE:</strong><br>• Open floor for questions<br>• Mandatory attendance checkout: Scan QR codes for GitHub, Portfolio (mj.erosa.page), LinkedIn"
+        >
+          <div class="story-container">
+            <h2
+              class="story-statement reveal delay-1"
+              style="font-size: 88px; line-height: 1.15; margin-bottom: 16px;"
+            >
+              Any Questions?
+            </h2>
+            <p
+              class="story-sub reveal delay-2"
+              style="
+                font-size: 28px;
+                margin-top: 0;
+                margin-bottom: 36px;
+                color: #ffffff;
+                font-weight: 500;
+              "
+            >
+              Scan to connect. Following is mandatory for attendance.
+            </p>
+
+            <div
+              class="grid-3 reveal delay-3"
+              style="margin-top: 10px; width: 1240px; gap: 40px;"
+            >
+              <!-- Card 1: GitHub -->
+              <div
+                class="arch-tier"
+                style="
+                  text-align: center;
+                  padding: 36px 28px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  style="
+                    background: #ffffff;
+                    padding: 12px;
+                    border-radius: 14px;
+                    display: inline-block;
+                    margin-bottom: 20px;
+                  "
+                >
+                  <img
+                    src="qr_github.png"
+                    alt="GitHub QR Code"
+                    style="width: 180px; height: 180px; display: block;"
+                  />
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 26px;
+                    font-weight: 800;
+                    color: #ffffff;
+                    margin-bottom: 10px;
+                  "
+                >
+                  GitHub
+                </div>
+                <a
+                  href="https://github.com/marvinjameserosa"
+                  target="_blank"
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 15px;
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-weight: 700;
+                  "
+                >
+                  github.com/marvinjameserosa
+                </a>
+              </div>
+
+              <!-- Card 2: Website / Portfolio -->
+              <div
+                class="arch-tier"
+                style="
+                  text-align: center;
+                  padding: 36px 28px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  border-color: rgba(255, 255, 255, 0.4);
+                  box-shadow: 0 0 35px rgba(255, 255, 255, 0.12);
+                "
+              >
+                <div
+                  style="
+                    background: #ffffff;
+                    padding: 12px;
+                    border-radius: 14px;
+                    display: inline-block;
+                    margin-bottom: 20px;
+                  "
+                >
+                  <img
+                    src="qr_website.png"
+                    alt="Portfolio Website QR Code"
+                    style="width: 180px; height: 180px; display: block;"
+                  />
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 26px;
+                    font-weight: 800;
+                    color: #ffffff;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Website
+                </div>
+                <a
+                  href="https://mj.erosa.page/"
+                  target="_blank"
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 15px;
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-weight: 700;
+                  "
+                >
+                  mj.erosa.page
+                </a>
+              </div>
+
+              <!-- Card 3: LinkedIn -->
+              <div
+                class="arch-tier"
+                style="
+                  text-align: center;
+                  padding: 36px 28px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  style="
+                    background: #ffffff;
+                    padding: 12px;
+                    border-radius: 14px;
+                    display: inline-block;
+                    margin-bottom: 20px;
+                  "
+                >
+                  <img
+                    src="qr_linkedin.png"
+                    alt="LinkedIn QR Code"
+                    style="width: 180px; height: 180px; display: block;"
+                  />
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 26px;
+                    font-weight: 800;
+                    color: #ffffff;
+                    margin-bottom: 10px;
+                  "
+                >
+                  LinkedIn
+                </div>
+                <a
+                  href="https://linkedin.com/in/marvinjameserosa"
+                  target="_blank"
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 15px;
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-weight: 700;
+                  "
+                >
+                  in/marvinjameserosa
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================
+                 SLIDE 26: FINAL ENFORCEMENT MEME
+                 ========================================== -->
+        <section
+          class="slide"
+          data-slide="26"
+          data-cue="<strong>FINAL ENFORCEMENT:</strong><br>• Comic relief: Gru with gun pointing at the audience<br>• Delivery: <em>&quot;I said... any questions? ...Did you scan the QR codes?&quot;</em><br>• Final laugh to seal the Cisco NetConnect onboarding talk"
+        >
+          <div class="story-container" style="justify-content: center; align-items: center;">
+            <div
+              class="meme-card reveal delay-1"
+              style="
+                max-height: 800px;
+                width: auto;
+                overflow: hidden;
+                border-radius: 18px;
+                box-shadow: 0 24px 70px rgba(0, 0, 0, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+              "
+            >
+              <img
+                src="memes/end_meme.png"
+                alt="Gru Gun Meme"
+                style="max-height: 800px; width: auto; object-fit: contain; display: block;"
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Matt Abrahams Presenter Cue & Engagement HUD (Toggle with 'P') -->
+    <div id="presenterCue" class="presenter-cue hidden">
+      <span id="cueSlideBadge" class="cue-slide-badge">SLIDE 01/26</span>
+      <span class="cue-badge">PRESENTER CUE</span>
+      <span id="cueText" class="cue-text"
+        >Use Arrow Keys to navigate. Press [P] to view speaking cues.</span
+      >
+      <span class="cue-shortcut">PRESS [P] TO HIDE</span>
+    </div>
+
+    <script>
+      /* ===========================================
+   CLEAN MONOCHROME PRESENTATION CONTROLLER
+   With Matt Abrahams Presenter Cues Support
+   =========================================== */
+      class SlideDeck {
+        constructor() {
+          this.slides = document.querySelectorAll(".slide");
+          this.totalSlides = this.slides.length;
+          this.currentIndex = 0;
+          this.stage = document.getElementById("deckStage");
+          this.cueBox = document.getElementById("presenterCue");
+          this.cueText = document.getElementById("cueText");
+          this.cueSlideBadge = document.getElementById("cueSlideBadge");
+          this.showCues = false; // Default: hidden. Press [P] to open.
+
+          this.initScale();
+          this.initKeyNav();
+          this.goTo(0);
+        }
+
+        initScale() {
+          const updateScale = () => {
+            const factor = Math.min(
+              window.innerWidth / 1920,
+              window.innerHeight / 1080,
+            );
+            const x = (window.innerWidth - 1920 * factor) / 2;
+            const y = (window.innerHeight - 1080 * factor) / 2;
+            this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+          };
+          updateScale();
+          window.addEventListener("resize", updateScale);
+        }
+
+        initKeyNav() {
+          window.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+              e.preventDefault();
+              this.next();
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+              e.preventDefault();
+              this.prev();
+            } else if (e.key === "p" || e.key === "P") {
+              e.preventDefault();
+              this.toggleCues();
+            }
+          });
+        }
+
+        toggleCues() {
+          this.showCues = !this.showCues;
+          if (this.cueBox) {
+            this.cueBox.classList.toggle("hidden", !this.showCues);
+          }
+        }
+
+        goTo(index) {
+          if (index < 0 || index >= this.totalSlides) return;
+          this.slides.forEach((slide, idx) => {
+            const isActive = idx === index;
+            slide.classList.toggle("active", isActive);
+            slide.classList.toggle("visible", isActive);
+          });
+          this.currentIndex = index;
+
+          // Update Slide Number Badge
+          const slideNumStr = String(index + 1).padStart(2, "0");
+          const totalStr = String(this.totalSlides).padStart(2, "0");
+          if (this.cueSlideBadge) {
+            this.cueSlideBadge.textContent = `SLIDE ${slideNumStr}/${totalStr}`;
+          }
+
+          // Update Matt Abrahams Presenter Cue for Current Slide
+          const currentSlide = this.slides[index];
+          const cue = currentSlide
+            ? currentSlide.getAttribute("data-cue")
+            : null;
+          if (this.cueText) {
+            if (cue) {
+              this.cueText.innerHTML = cue;
+            } else {
+              this.cueText.innerHTML = `Maintain conversational eye contact & pause before transitions.`;
+            }
+          }
+
+          // Keep cue box visibility aligned with this.showCues state
+          if (this.cueBox) {
+            this.cueBox.classList.toggle("hidden", !this.showCues);
+          }
+        }
+
+        next() {
+          this.goTo(this.currentIndex + 1);
+        }
+        prev() {
+          this.goTo(this.currentIndex - 1);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        window.deck = new SlideDeck();
+      });
+    </script>
+  </body>
+</html>

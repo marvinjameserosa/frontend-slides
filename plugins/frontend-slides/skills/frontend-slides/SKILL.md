@@ -88,7 +88,9 @@ When enhancing existing presentations, fixed-stage fitting is the biggest risk:
 
 ## Phase 1: Content Discovery (New Presentations)
 
-**Ask ALL questions together** so the user fills everything out at once. If the current environment provides a native structured-question UI, use it; otherwise ask in one concise message with clearly numbered choices:
+**Ask ALL questions together** so the user fills everything out at once:
+- **In Google Antigravity:** Call the `ask_question` tool with all 4 questions in a single call to provide an interactive modal.
+- **In other environments:** Ask in one concise message with clearly numbered choices.
 
 **Question 1 — Purpose** (header: "Purpose"):
 What is this presentation for? Options: Pitch deck / Teaching-Tutorial / Conference talk / Internal presentation
@@ -188,12 +190,15 @@ Read [STYLE_PRESETS.md](STYLE_PRESETS.md) for safe preset candidates. If [bold-t
 
 Save previews to `.frontend-slides/slide-previews/` (style-a.html, style-b.html, style-c.html). Each should be self-contained and compact, showing one animated title slide.
 
-Open each preview automatically for the user.
+Open each preview automatically for the user, or provide direct clickable `file:///` links. In Antigravity, you can also inspect/verify previews using the browser subagent.
 
 ### Step 2.1: User Picks
 
-Ask (header: "Style"):
-Which style preview do you prefer? Options: Style A: [Name] / Style B: [Name] / Style C: [Name] / Mix elements
+Ask:
+- **In Google Antigravity:** Call `ask_question`:
+  - Question: "Which style preview do you prefer?"
+  - Options: ["Style A: [Name]", "Style B: [Name]", "Style C: [Name]", "Mix elements"]
+- **In other environments:** Ask (header: "Style") with options for Style A, Style B, Style C, or Mix elements.
 
 If "Mix elements", ask for specifics.
 
@@ -261,7 +266,7 @@ When converting PowerPoint files:
 ## Phase 5: Delivery
 
 1. **Clean up** — Delete `.frontend-slides/slide-previews/` if it exists
-2. **Open** — Use `open [filename].html` to launch in browser
+2. **Open & Link** — Provide a clickable `file:///` link to the generated HTML file. In environments with browser support (such as Antigravity's `browser_subagent`), launch or verify the presentation. On local command line, run `open [filename].html` or `start [filename].html` (Windows).
 3. **Summarize** — Tell the user:
    - File location, style name, slide count
    - Navigation: Arrow keys, Space, swipe/tap if enabled
@@ -273,14 +278,11 @@ When converting PowerPoint files:
 
 ## Phase 6: Share & Export (Optional)
 
-After delivery, **ask the user:** _"Would you like to share this presentation? I can deploy it to a live URL (works on any device including phones) or export it as a PDF."_
-
-Options:
-
-- **Deploy to URL** — Shareable link that works on any device
-- **Export to PDF** — Universal file for email, Slack, print
-- **Both**
-- **No thanks**
+After delivery, **ask the user:**
+- **In Google Antigravity:** Call `ask_question`:
+  - Question: "Would you like to share or export this presentation?"
+  - Options: ["Deploy to a Live URL (Vercel)", "Export to PDF", "Both", "No thanks"]
+- **In other environments:** Ask: _"Would you like to share this presentation? I can deploy it to a live URL (works on any device including phones) or export it as a PDF."_ (Options: Deploy to URL / Export to PDF / Both / No thanks)
 
 If the user declines, stop here. If they choose one or both, proceed below.
 

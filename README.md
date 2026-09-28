@@ -71,6 +71,28 @@ git clone https://github.com/zarazhangrui/frontend-slides.git ~/.claude/skills/f
 
 Then use it by typing `/frontend-slides` in Claude Code. Standalone skills are not namespaced.
 
+### Google Antigravity
+
+Frontend Slides includes full native support for **Google Antigravity**:
+- Located automatically in `.agents/skills/frontend-slides/`
+- Configured via `.agents/skills.json` and `.agents/plugins.json`
+- Supports interactive questionnaires using Antigravity's native `ask_question` tool
+- Slide previews and verification via Antigravity's browser capabilities and clickable `file:///` links
+
+#### Using in this Workspace:
+Antigravity automatically discovers the skill. Just ask:
+> "Create a 5-slide pitch deck about our new product"
+> or
+> "Convert presentation.pptx to slides"
+
+#### Using in Other Antigravity Projects:
+To use this skill across any project in Antigravity, either:
+1. **Workspace install**: Copy the `.agents/skills/frontend-slides` directory into your project's `.agents/skills/` folder.
+2. **Global install**: Copy the skill folder to your global Antigravity config directory:
+   ```bash
+   cp -R .agents/skills/frontend-slides ~/.gemini/config/skills/
+   ```
+
 ### Other Coding Agents
 
 Agents such as Codex, Kimi Code, OpenCode, Gemini CLI, or other local coding assistants can use the same core skill. The simplest path is to send the agent this GitHub repo link and ask it to use the Frontend Slides skill:
