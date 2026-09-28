@@ -315,32 +315,32 @@
 
       .diagram-box {
         fill: #0c0c0c;
-        stroke: rgba(255, 255, 255, 0.18);
+        stroke: rgba(255, 255, 255, 0.22);
         stroke-width: 1.5;
-        rx: 8px;
+        rx: 12px;
       }
 
       .diagram-box-highlight {
         fill: #141414;
-        stroke: #f5ee38;
-        stroke-width: 1.5;
-        rx: 8px;
-        filter: drop-shadow(0 0 20px rgba(245, 238, 56, 0.22));
+        stroke: #ffffff;
+        stroke-width: 2;
+        rx: 12px;
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
       }
 
       .diagram-box-barrier {
-        fill: rgba(255, 60, 60, 0.06);
-        stroke: rgba(255, 80, 80, 0.55);
+        fill: rgba(255, 59, 48, 0.06);
+        stroke: rgba(255, 59, 48, 0.7);
         stroke-dasharray: 6 6;
         stroke-width: 1.5;
-        rx: 8px;
+        rx: 12px;
       }
 
       .diagram-txt-title {
         font-family: var(--font-mono);
-        font-size: 12px;
-        font-weight: 600;
-        fill: #ededed;
+        font-size: 13px;
+        font-weight: 700;
+        fill: #ffffff;
         text-anchor: middle;
       }
 
@@ -356,7 +356,7 @@
         font-family: var(--font-mono);
         font-size: 10px;
         font-weight: 700;
-        fill: #f5ee38;
+        fill: #ffffff;
         text-anchor: middle;
       }
 
@@ -693,7 +693,7 @@
         <section
           class="slide"
           data-slide="2"
-          data-cue="<strong>THE EXCUSE & THE MISSION:</strong><br>• The excuse: <em>&quot;We don't have the budget&quot;</em><br>• Reality: Budget never stopped us from launching national orgs & 1,000+ attendee events<br>• We pull this off not because mayaman tayo (diyos ko po!) — but through volunteer grit & creativity<br>• Passing the torch: Dati members & volunteers lang kayo; ngayon kayo na ang tagapagmana<br>• Goal: I-impart ang mga dakilang pinagbabawal na technique!"
+          data-cue='<strong>THE EXCUSE & THE MISSION:</strong><br>• The excuse: <em>"We don&apos;t have the budget"</em><br>• Reality: Budget never stopped us from launching national orgs & 1,000+ attendee events<br>• We pull this off not because mayaman tayo (diyos ko po!) — but through volunteer grit & creativity<br>• Passing the torch: Dati members & volunteers lang kayo; ngayon kayo na ang tagapagmana<br>• Goal: I-impart ang mga dakilang pinagbabawal na technique!'
         >
           <div class="story-container">
             <p
@@ -787,21 +787,23 @@
               Hosting our 3rd Capture The Flag. Now expanding to Australia.
             </h2>
             <p class="story-sub reveal delay-2">
-              Hundreds of hackers across Luzon, Visayas, Mindanao—and now international. Enterprise scale for ₱0.00.
+              Hundreds of hackers across Luzon, Visayas, Mindanao, and now
+              international.
             </p>
             <div
               class="diagram-stage reveal delay-3"
-              style="width: 1200px; height: 380px; margin-top: 10px"
+              style="width: 1240px; height: 380px; margin-top: 10px"
             >
-              <svg viewBox="0 0 1200 380" width="100%" height="380">
+              <svg viewBox="0 0 1240 380" width="100%" height="380">
                 <defs>
-                  <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18" />
-                    <stop offset="60%" stop-color="#ffffff" stop-opacity="0.04" />
-                    <stop offset="100%" stop-color="#000000" stop-opacity="0" />
-                  </radialGradient>
-                  <filter id="glowNode" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
+                  <filter
+                    id="hubGlow"
+                    x="-50%"
+                    y="-50%"
+                    width="200%"
+                    height="200%"
+                  >
+                    <feGaussianBlur stdDeviation="8" result="blur" />
                     <feMerge>
                       <feMergeNode in="blur" />
                       <feMergeNode in="SourceGraphic" />
@@ -809,237 +811,416 @@
                   </filter>
                 </defs>
 
-                <!-- Subtle background mesh glow -->
-                <circle cx="600" cy="190" r="220" fill="url(#centerGlow)" />
-
-                <!-- Network Coordinate Marks -->
-                <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
-                  <line x1="200" y1="190" x2="1000" y2="190" stroke-dasharray="4 8" />
-                  <line x1="600" y1="40" x2="600" y2="340" stroke-dasharray="4 8" />
-                  <circle cx="600" cy="190" r="280" fill="none" stroke-dasharray="2 10" />
-                  <circle cx="600" cy="190" r="160" fill="none" stroke-dasharray="3 7" stroke="rgba(255,255,255,0.08)" />
-                </g>
-
-                <!-- Outer Mesh Inter-Node Links -->
-                <line x1="390" y1="110" x2="500" y2="50" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="500" y1="50" x2="700" y2="50" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="700" y1="50" x2="810" y2="110" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="810" y1="110" x2="870" y2="200" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="870" y1="200" x2="780" y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="780" y1="300" x2="600" y2="340" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="600" y1="340" x2="420" y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="420" y1="300" x2="330" y2="200" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-                <line x1="330" y1="200" x2="390" y2="110" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
-
-                <!-- Cross-Mesh Redundant Ring Connections -->
-                <line x1="390" y1="110" x2="520" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="500" y1="50" x2="520" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="500" y1="50" x2="680" y2="130" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
-                <line x1="700" y1="50" x2="680" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="810" y1="110" x2="680" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="810" y1="110" x2="750" y2="210" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="870" y1="200" x2="750" y2="210" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="780" y1="300" x2="700" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="600" y1="340" x2="700" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="600" y1="340" x2="500" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="420" y1="300" x2="500" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="330" y1="200" x2="450" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="390" y1="110" x2="450" y2="200" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="450" y1="200" x2="500" y2="260" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
-                <line x1="750" y1="210" x2="700" y2="260" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" />
-                <line x1="520" y1="130" x2="680" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-                <line x1="500" y1="260" x2="700" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
-
-                <!-- Direct Spoke Backbone Links to Central Hub -->
-                <line x1="520" y1="130" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
-                <line x1="680" y1="130" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
-                <line x1="750" y1="210" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
-                <line x1="700" y1="260" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
-                <line x1="500" y1="260" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
-                <line x1="450" y1="200" x2="600" y2="190" class="cluster-line-active" stroke-width="2.5" />
-
-                <!-- Network Packets In Flight -->
-                <circle r="4" class="packet-dot">
-                  <animateMotion path="M 330,200 L 450,200 L 600,190" dur="2s" repeatCount="indefinite" />
-                </circle>
-                <circle r="4" class="packet-dot">
-                  <animateMotion path="M 870,200 L 750,210 L 600,190" dur="1.8s" repeatCount="indefinite" />
-                </circle>
-                <circle r="4" class="packet-dot">
-                  <animateMotion path="M 500,50 L 520,130 L 600,190" dur="1.7s" repeatCount="indefinite" />
-                </circle>
-                <circle r="4" class="packet-dot">
-                  <animateMotion path="M 780,300 L 700,260 L 600,190" dur="2.3s" repeatCount="indefinite" />
-                </circle>
-
-                <!-- Outer Competitor Team Nodes (Circular, monochrome with varied sizes) -->
-                <!-- Hull Nodes -->
-                <circle
-                  cx="330"
-                  cy="200"
-                  r="18"
-                  fill="#141414"
-                  stroke="#ffffff"
-                  stroke-width="1.8"
-                />
-                <circle
-                  cx="390"
-                  cy="110"
-                  r="14"
-                  fill="#0d0d0f"
-                  stroke="rgba(255,255,255,0.4)"
-                  stroke-width="1.5"
-                />
-                <circle
-                  cx="500"
-                  cy="50"
-                  r="20"
-                  fill="#141414"
-                  stroke="#ffffff"
-                  stroke-width="1.8"
-                />
-                <circle
-                  cx="700"
-                  cy="50"
-                  r="15"
-                  fill="#0d0d0f"
-                  stroke="rgba(255,255,255,0.4)"
-                  stroke-width="1.5"
-                />
-                <circle
-                  cx="810"
-                  cy="110"
-                  r="19"
-                  fill="#141414"
-                  stroke="#ffffff"
-                  stroke-width="1.8"
-                />
-                <circle
-                  cx="870"
-                  cy="200"
-                  r="22"
-                  fill="#141414"
-                  stroke="#ffffff"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="780"
-                  cy="300"
-                  r="17"
-                  fill="#0d0d0f"
-                  stroke="rgba(255,255,255,0.5)"
-                  stroke-width="1.5"
-                />
-                <circle
-                  cx="600"
-                  cy="340"
-                  r="21"
-                  fill="#141414"
-                  stroke="#ffffff"
-                  stroke-width="2"
-                />
-                <circle
-                  cx="420"
-                  cy="300"
-                  r="16"
-                  fill="#0d0d0f"
-                  stroke="rgba(255,255,255,0.4)"
-                  stroke-width="1.5"
-                />
-
-                <!-- Mid-cluster Inner Nodes -->
-                <circle
-                  cx="450"
-                  cy="200"
-                  r="13"
-                  fill="#181818"
-                  stroke="#ffffff"
-                  stroke-width="1.5"
-                />
-                <circle
-                  cx="520"
-                  cy="130"
-                  r="16"
-                  fill="#181818"
-                  stroke="#ffffff"
-                  stroke-width="1.5"
-                />
-                <circle
-                  cx="680"
-                  cy="130"
-                  r="14"
-                  fill="#181818"
-                  stroke="#ffffff"
-                  stroke-width="1.5"
-                />
-                <circle
-                  cx="750"
-                  cy="210"
-                  r="15"
-                  fill="#181818"
-                  stroke="#ffffff"
-                  stroke-width="1.5"
-                />
-                <circle
-                  cx="700"
-                  cy="260"
-                  r="12"
-                  fill="#181818"
-                  stroke="rgba(255,255,255,0.6)"
-                  stroke-width="1.2"
-                />
-                <circle
-                  cx="500"
-                  cy="260"
-                  r="14"
-                  fill="#181818"
-                  stroke="rgba(255,255,255,0.6)"
-                  stroke-width="1.2"
-                />
-
-                <!-- Focal Center: Capture The Flag Platform Hub -->
-                <circle
-                  cx="600"
-                  cy="190"
-                  r="48"
-                  fill="#0c0c0c"
-                  stroke="#ffffff"
+                <!-- Radial Star Spoke Lines (Outer Nodes -> Central Hub) -->
+                <!-- Top-Left to Hub -->
+                <line
+                  x1="260"
+                  y1="85"
+                  x2="520"
+                  y2="190"
+                  class="cluster-line-active"
                   stroke-width="2.5"
-                  filter="drop-shadow(0 0 25px rgba(255, 255, 255, 0.4))"
                 />
-                <circle
-                  cx="600"
-                  cy="190"
-                  r="38"
-                  fill="none"
-                  stroke="rgba(255, 255, 255, 0.35)"
-                  stroke-width="1.2"
-                  stroke-dasharray="4 4"
+                <!-- Top-Center to Hub -->
+                <line
+                  x1="620"
+                  y1="85"
+                  x2="620"
+                  y2="155"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <!-- Top-Right to Hub -->
+                <line
+                  x1="980"
+                  y1="85"
+                  x2="720"
+                  y2="190"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <!-- Bottom-Left to Hub -->
+                <line
+                  x1="260"
+                  y1="295"
+                  x2="520"
+                  y2="190"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <!-- Bottom-Center to Hub -->
+                <line
+                  x1="620"
+                  y1="295"
+                  x2="620"
+                  y2="225"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <!-- Bottom-Right to Hub -->
+                <line
+                  x1="980"
+                  y1="295"
+                  x2="720"
+                  y2="190"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
                 />
 
-                <!-- Center Title Pill -->
+                <!-- Animated Packet Dots Streaming Along the Spokes -->
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 260,85 L 520,190"
+                    dur="1.8s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 620,85 L 620,155"
+                    dur="1.4s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 980,85 L 720,190"
+                    dur="1.9s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 260,295 L 520,190"
+                    dur="2.1s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 620,295 L 620,225"
+                    dur="1.5s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 980,295 L 720,190"
+                    dur="2.0s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+
+                <!-- ================= CENTRAL HUB ================= -->
                 <rect
-                  x="455"
-                  y="173"
-                  width="290"
-                  height="34"
-                  rx="7"
-                  fill="#000000"
-                  stroke="#ffffff"
-                  stroke-width="1.5"
+                  x="520"
+                  y="155"
+                  width="200"
+                  height="70"
+                  rx="10"
+                  class="diagram-box-highlight"
+                  stroke-width="2"
+                  filter="url(#hubGlow)"
                 />
+                <!-- Hub Indicator LED Dots -->
+                <circle cx="580" cy="172" r="3" fill="#ffffff" />
+                <circle cx="596" cy="172" r="3" fill="#ffffff" />
+                <circle cx="612" cy="172" r="3" fill="#ffffff" />
+                <circle cx="628" cy="172" r="3" fill="rgba(255,255,255,0.4)" />
+                <circle cx="644" cy="172" r="3" fill="rgba(255,255,255,0.4)" />
+                <circle cx="660" cy="172" r="3" fill="rgba(255,255,255,0.4)" />
                 <text
-                  x="600"
-                  y="195"
-                  font-family="var(--font-mono)"
-                  font-size="12"
+                  x="620"
+                  y="200"
+                  class="diagram-txt-title"
+                  font-size="32"
                   font-weight="800"
                   fill="#ffffff"
-                  letter-spacing="0.08em"
-                  text-anchor="middle"
                 >
-                  CAPTURE THE FLAG PLATFORM
+                  CTF PLATFORM HUB
                 </text>
+
+                <!-- ================= 6 PERIPHERAL WORKSTATION NODES ================= -->
+                <!-- 1. Top-Left Node (PUP SANTA MARIA) -->
+                <g transform="translate(180, 20)">
+                  <rect
+                    x="0"
+                    y="0"
+                    width="160"
+                    height="52"
+                    rx="8"
+                    class="diagram-box"
+                    stroke-width="1.5"
+                  />
+                  <polygon
+                    points="68,52 92,52 98,62 62,62"
+                    fill="#141414"
+                    stroke="rgba(255,255,255,0.2)"
+                    stroke-width="1"
+                  />
+                  <line
+                    x1="56"
+                    y1="62"
+                    x2="104"
+                    y2="62"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                  />
+                  <text
+                    x="80"
+                    y="25"
+                    class="diagram-txt-title"
+                    font-size="15"
+                    font-weight="900"
+                    fill="#ffffff"
+                  >
+                    BULACAN TEAMS
+                  </text>
+                  <text
+                    x="80"
+                    y="42"
+                    class="diagram-txt-sub"
+                    font-size="11"
+                    font-weight="700"
+                    fill="#a1a1a1"
+                  >
+                    COMPETITORS
+                  </text>
+                </g>
+
+                <!-- 2. Top-Center Node (LUZON TEAMS) -->
+                <g transform="translate(540, 20)">
+                  <rect
+                    x="0"
+                    y="0"
+                    width="160"
+                    height="52"
+                    rx="8"
+                    class="diagram-box"
+                    stroke-width="1.5"
+                  />
+                  <polygon
+                    points="68,52 92,52 98,62 62,62"
+                    fill="#141414"
+                    stroke="rgba(255,255,255,0.2)"
+                    stroke-width="1"
+                  />
+                  <line
+                    x1="56"
+                    y1="62"
+                    x2="104"
+                    y2="62"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                  />
+                  <text
+                    x="80"
+                    y="25"
+                    class="diagram-txt-title"
+                    font-size="15"
+                    font-weight="900"
+                    fill="#ffffff"
+                  >
+                    LUZON TEAMS
+                  </text>
+                  <text
+                    x="80"
+                    y="42"
+                    class="diagram-txt-sub"
+                    font-size="11"
+                    font-weight="700"
+                    fill="#a1a1a1"
+                  >
+                    COMPETITORS
+                  </text>
+                </g>
+
+                <!-- 3. Top-Right Node (AUSTRALIA) -->
+                <g transform="translate(900, 20)">
+                  <rect
+                    x="0"
+                    y="0"
+                    width="160"
+                    height="52"
+                    rx="8"
+                    class="diagram-box"
+                    stroke-width="1.5"
+                  />
+                  <polygon
+                    points="68,52 92,52 98,62 62,62"
+                    fill="#141414"
+                    stroke="rgba(255,255,255,0.2)"
+                    stroke-width="1"
+                  />
+                  <line
+                    x1="56"
+                    y1="62"
+                    x2="104"
+                    y2="62"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                  />
+                  <text
+                    x="80"
+                    y="25"
+                    class="diagram-txt-title"
+                    font-size="15"
+                    font-weight="900"
+                    fill="#ffffff"
+                  >
+                    AUSTRALIA TEAMS
+                  </text>
+                  <text
+                    x="80"
+                    y="42"
+                    class="diagram-txt-sub"
+                    font-size="11"
+                    font-weight="700"
+                    fill="#a1a1a1"
+                  >
+                    COMPETITORS
+                  </text>
+                </g>
+
+                <!-- 4. Bottom-Left Node (CIT CEBU) -->
+                <g transform="translate(180, 298)">
+                  <line
+                    x1="56"
+                    y1="0"
+                    x2="104"
+                    y2="0"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                  />
+                  <polygon
+                    points="62,0 98,0 92,10 68,10"
+                    fill="#141414"
+                    stroke="rgba(255,255,255,0.2)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="0"
+                    y="10"
+                    width="160"
+                    height="52"
+                    rx="8"
+                    class="diagram-box"
+                    stroke-width="1.5"
+                  />
+                  <text
+                    x="80"
+                    y="35"
+                    class="diagram-txt-title"
+                    font-size="15"
+                    font-weight="900"
+                    fill="#ffffff"
+                  >
+                    CEBUANO TEAMS
+                  </text>
+                  <text
+                    x="80"
+                    y="52"
+                    class="diagram-txt-accent"
+                    font-size="11"
+                    font-weight="700"
+                  >
+                    COMPETITORS
+                  </text>
+                </g>
+
+                <!-- 5. Bottom-Center Node (VISAYAS TEAMS) -->
+                <g transform="translate(540, 298)">
+                  <line
+                    x1="56"
+                    y1="0"
+                    x2="104"
+                    y2="0"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                  />
+                  <polygon
+                    points="62,0 98,0 92,10 68,10"
+                    fill="#141414"
+                    stroke="rgba(255,255,255,0.2)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="0"
+                    y="10"
+                    width="160"
+                    height="52"
+                    rx="8"
+                    class="diagram-box"
+                    stroke-width="1.5"
+                  />
+                  <text
+                    x="80"
+                    y="35"
+                    class="diagram-txt-title"
+                    font-size="15"
+                    font-weight="900"
+                    fill="#ffffff"
+                  >
+                    VISAYAS TEAMS
+                  </text>
+                  <text
+                    x="80"
+                    y="52"
+                    class="diagram-txt-sub"
+                    font-size="11"
+                    font-weight="700"
+                    fill="#a1a1a1"
+                  >
+                    COMPETITORS
+                  </text>
+                </g>
+
+                <!-- 6. Bottom-Right Node (MINDANAO TEAMS) -->
+                <g transform="translate(900, 298)">
+                  <line
+                    x1="56"
+                    y1="0"
+                    x2="104"
+                    y2="0"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                  />
+                  <polygon
+                    points="62,0 98,0 92,10 68,10"
+                    fill="#141414"
+                    stroke="rgba(255,255,255,0.2)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="0"
+                    y="10"
+                    width="160"
+                    height="52"
+                    rx="8"
+                    class="diagram-box"
+                    stroke-width="1.5"
+                  />
+                  <text
+                    x="80"
+                    y="35"
+                    class="diagram-txt-title"
+                    font-size="15"
+                    font-weight="900"
+                    fill="#ffffff"
+                  >
+                    MINDANAO TEAMS
+                  </text>
+                  <text
+                    x="80"
+                    y="52"
+                    class="diagram-txt-sub"
+                    font-size="11"
+                    font-weight="700"
+                    fill="#a1a1a1"
+                  >
+                    COMPETITORS
+                  </text>
+                </g>
               </svg>
             </div>
           </div>
@@ -1085,7 +1266,7 @@
         <section
           class="slide"
           data-slide="6"
-          data-cue="<strong>AUDIENCE HOOK: DOTA:</strong><br>• Show of hands: Sino nakapaglaro ng Dota sa comshop?<br>• Iconic trash talk: <em>&quot;Pinabili lang kita ng itlog!&quot;</em> & shouting across aisles<br>• Blue ethernet cables plugged into one unmanaged switch<br>• Zero internet needed — local packets stayed in the room"
+          data-cue='<strong>AUDIENCE HOOK: DOTA:</strong><br>• Show of hands: Sino nakapaglaro ng Dota sa comshop?<br>• Iconic trash talk: <em>"Pinabili lang kita ng itlog!"</em> & shouting across aisles<br>• Blue ethernet cables plugged into one unmanaged switch<br>• Zero internet needed — local packets stayed in the room'
         >
           <div class="story-container">
             <h2
@@ -1220,7 +1401,8 @@
                 color: var(--text-secondary);
               "
             >
-              Arun built 3 apps on localhost. Connecting to your PC from outside is the exact same networking challenge as hosting a CTF.
+              Arun built 3 apps on localhost. Connecting to your PC from outside
+              is the exact same networking challenge as hosting a CTF.
             </p>
             <div
               class="meme-card reveal delay-3"
@@ -1259,84 +1441,145 @@
                 margin-bottom: 36px;
               "
             >
-              In ancient times, we just <span class="text-highlight">port-forwarded</span>.
+              In ancient times, we just
+              <span class="text-highlight">port-forwarded</span>.
             </h2>
             <div
               class="diagram-stage reveal delay-2"
-              style="width: 1100px; height: 260px; margin-top: 10px"
+              style="width: 1240px; height: 260px; margin-top: 10px"
             >
-              <svg viewBox="0 0 1100 240" width="100%" height="240">
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
                 <!-- 1. Public Internet -->
                 <rect
-                  x="60"
-                  y="55"
-                  width="270"
-                  height="130"
+                  x="50"
+                  y="35"
+                  width="330"
+                  height="180"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="195" y="128" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
-                  PUBLIC INTERNET
+                <text
+                  x="215"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  Public Web
+                </text>
+                <text
+                  x="215"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
+                >
+                  External Traffic
                 </text>
 
                 <!-- Flow Line: Internet -> Router -->
                 <line
-                  x1="330"
-                  y1="120"
-                  x2="415"
-                  y2="120"
+                  x1="380"
+                  y1="125"
+                  x2="455"
+                  y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
+                <polygon points="450,121 458,125 450,129" fill="#888888" />
                 <circle r="4.5" class="packet-dot">
                   <animateMotion
-                    path="M 330,120 L 415,120"
-                    dur="1.4s"
+                    path="M 380,125 L 455,125"
+                    dur="1.3s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
-                <!-- 2. Home Router (Highlighted) -->
+                <!-- 2. Home Router -->
                 <rect
-                  x="415"
-                  y="50"
-                  width="270"
-                  height="140"
+                  x="455"
+                  y="35"
+                  width="330"
+                  height="180"
                   rx="14"
-                  class="diagram-box-highlight"
+                  class="diagram-box"
                 />
-                <text x="550" y="128" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
-                  HOME ROUTER
+                <text
+                  x="620"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  Home Router
+                </text>
+                <text
+                  x="620"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
+                >
+                  Port Forward (22/80)
                 </text>
 
                 <!-- Flow Line: Router -> PC -->
                 <line
-                  x1="685"
-                  y1="120"
-                  x2="770"
-                  y2="120"
+                  x1="785"
+                  y1="125"
+                  x2="860"
+                  y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
+                <polygon points="855,121 863,125 855,129" fill="#888888" />
                 <circle r="4.5" class="packet-dot">
                   <animateMotion
-                    path="M 685,120 L 770,120"
-                    dur="1.4s"
+                    path="M 785,125 L 860,125"
+                    dur="1.3s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
                 <!-- 3. Your PC -->
                 <rect
-                  x="770"
-                  y="55"
-                  width="270"
-                  height="130"
+                  x="860"
+                  y="35"
+                  width="330"
+                  height="180"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="905" y="128" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
-                  YOUR PC
+
+                <text
+                  x="1025"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  Bedroom PC
+                </text>
+                <text
+                  x="1025"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
+                >
+                  192.168.1.100 (Host)
                 </text>
               </svg>
             </div>
@@ -1365,93 +1608,224 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px"
             >
-              Public IPv4 addresses are expensive. Thousands of homes share just <span class="text-highlight">one public IP</span>—making inbound port forwarding impossible.
+              Public IPv4 addresses are expensive. Thousands of homes share just
+              <span class="text-highlight">one public IP</span>—making inbound
+              port forwarding impossible.
             </p>
             <div
               class="diagram-stage reveal delay-3"
-              style="width: 1140px; height: 280px; margin-top: 10px"
+              style="width: 1240px; height: 260px; margin-top: 10px"
             >
-              <svg viewBox="0 0 1140 260" width="100%" height="260">
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
                 <!-- 1. Left: Public Internet -->
                 <rect
                   x="50"
-                  y="65"
-                  width="230"
-                  height="130"
+                  y="45"
+                  width="280"
+                  height="160"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="165" y="138" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff">
+                <text
+                  x="190"
+                  y="110"
+                  class="diagram-txt-title"
+                  font-size="28"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
                   PUBLIC INTERNET
                 </text>
+                <text
+                  x="190"
+                  y="146"
+                  class="diagram-txt-sub"
+                  font-size="16"
+                  font-weight="700"
+                  fill="#a1a1a1"
+                  letter-spacing="0.02em"
+                >
+                  INBOUND TRAFFIC
+                </text>
 
-                <!-- Inbound attack line dropped at CGNAT -->
+                <!-- Inbound attack line dropped at CGNAT (Red) -->
                 <line
-                  x1="280"
-                  y1="130"
-                  x2="400"
-                  y2="130"
-                  stroke="rgba(255,80,80,0.6)"
+                  x1="330"
+                  y1="125"
+                  x2="460"
+                  y2="125"
+                  stroke="#ff3b30"
                   stroke-width="2.5"
                   stroke-dasharray="6 6"
                 />
-                <circle r="4.5" class="packet-dot-danger">
+                <circle r="5" class="packet-dot-danger">
                   <animateMotion
-                    path="M 280,130 L 390,130"
-                    dur="1.3s"
+                    path="M 330,125 L 440,125"
+                    dur="1.2s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
                 <!-- Block indicator -->
-                <circle cx="400" cy="130" r="18" fill="#141414" stroke="#ff4d4d" stroke-width="2" />
-                <text x="400" y="137" fill="#ff4d4d" font-family="var(--font-mono)" font-size="16" font-weight="900" text-anchor="middle">✕</text>
+                <circle
+                  cx="460"
+                  cy="125"
+                  r="16"
+                  fill="#141414"
+                  stroke="#ff3b30"
+                  stroke-width="2"
+                />
+                <text
+                  x="460"
+                  y="131"
+                  fill="#ff3b30"
+                  font-family="var(--font-mono)"
+                  font-size="15"
+                  font-weight="900"
+                  text-anchor="middle"
+                >
+                  ✕
+                </text>
 
                 <!-- 2. Middle: The Shared Single Public IP / CGNAT Gateway -->
                 <rect
-                  x="440"
+                  x="500"
                   y="45"
-                  width="270"
-                  height="170"
+                  width="330"
+                  height="160"
                   rx="14"
                   class="diagram-box-highlight"
                 />
-                <text x="575" y="105" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff">
+                <text
+                  x="665"
+                  y="96"
+                  class="diagram-txt-title"
+                  font-size="26"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
                   ISP CGNAT GATEWAY
                 </text>
                 <line
-                  x1="465"
-                  y1="125"
-                  x2="685"
-                  y2="125"
+                  x1="530"
+                  y1="116"
+                  x2="800"
+                  y2="116"
                   stroke="rgba(255,255,255,0.15)"
                 />
-                <text x="575" y="152" class="diagram-txt-accent" font-size="14" font-weight="800">
+                <text
+                  x="665"
+                  y="144"
+                  class="diagram-txt-accent"
+                  font-size="17"
+                  font-weight="800"
+                  letter-spacing="0.02em"
+                >
                   1 SHARED PUBLIC IP
                 </text>
-                <text x="575" y="185" fill="#ff6b6b" font-family="var(--font-mono)" font-size="13" font-weight="800" text-anchor="middle">
-                  INBOUND BLOCKED
+                <text
+                  x="665"
+                  y="174"
+                  fill="#ff3b30"
+                  font-family="var(--font-mono)"
+                  font-size="14"
+                  font-weight="900"
+                  text-anchor="middle"
+                  letter-spacing="0.02em"
+                >
+                  [ INBOUND PORT BLOCKED ]
                 </text>
 
                 <!-- Fan-out lines from 1 IP to Multiple Connected Homes -->
-                <line x1="710" y1="105" x2="840" y2="55" class="cluster-line" stroke-width="2" />
-                <line x1="710" y1="130" x2="840" y2="130" class="cluster-line" stroke-width="2" />
-                <line x1="710" y1="155" x2="840" y2="205" class="cluster-line" stroke-width="2" />
+                <line
+                  x1="830"
+                  y1="100"
+                  x2="910"
+                  y2="65"
+                  class="cluster-line"
+                  stroke-width="2.5"
+                />
+                <line
+                  x1="830"
+                  y1="125"
+                  x2="910"
+                  y2="125"
+                  class="cluster-line"
+                  stroke-width="2.5"
+                />
+                <line
+                  x1="830"
+                  y1="150"
+                  x2="910"
+                  y2="185"
+                  class="cluster-line"
+                  stroke-width="2.5"
+                />
 
                 <!-- 3. Right: Multiple Subscribers Sharing the Same IP -->
                 <!-- Home A -->
-                <rect x="840" y="30" width="250" height="52" rx="10" class="diagram-box" />
-                <text x="965" y="62" class="diagram-txt-title" font-size="15" font-weight="700">YOUR BEDROOM</text>
+                <rect
+                  x="910"
+                  y="40"
+                  width="290"
+                  height="50"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text
+                  x="1055"
+                  y="71"
+                  class="diagram-txt-title"
+                  font-size="17"
+                  font-weight="800"
+                  fill="#ffffff"
+                >
+                  YOUR BEDROOM
+                </text>
 
                 <!-- Home B -->
-                <rect x="840" y="104" width="250" height="52" rx="10" class="diagram-box" />
-                <text x="965" y="136" class="diagram-txt-title" font-size="15" font-weight="700">NEIGHBOR'S HOUSE</text>
+                <rect
+                  x="910"
+                  y="100"
+                  width="290"
+                  height="50"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text
+                  x="1055"
+                  y="131"
+                  class="diagram-txt-title"
+                  font-size="17"
+                  font-weight="800"
+                  fill="#ffffff"
+                >
+                  NEIGHBOR'S HOUSE
+                </text>
 
                 <!-- Home C -->
-                <rect x="840" y="178" width="250" height="52" rx="10" class="diagram-box" />
-                <text x="965" y="210" class="diagram-txt-title" font-size="15" font-weight="700">1,000+ OTHER HOMES</text>
+                <rect
+                  x="910"
+                  y="160"
+                  width="290"
+                  height="50"
+                  rx="10"
+                  class="diagram-box"
+                />
+                <text
+                  x="1055"
+                  y="191"
+                  class="diagram-txt-title"
+                  font-size="17"
+                  font-weight="800"
+                  fill="#ffffff"
+                >
+                  1,000+ OTHER HOMES
+                </text>
               </svg>
             </div>
           </div>
@@ -1501,14 +1875,11 @@
           <div class="story-container">
             <h2
               class="story-statement reveal delay-1"
-              style="
-                font-size: 84px;
-                max-width: 1300px;
-                line-height: 1.15;
-              "
+              style="font-size: 84px; max-width: 1300px; line-height: 1.15"
             >
               The easy way is to just pay AWS.<br />
-              We chose a <span class="text-underline">more creative solution</span>.
+              We chose a
+              <span class="text-underline">more creative solution</span>.
             </h2>
           </div>
         </section>
@@ -1557,112 +1928,145 @@
               At its core, this is just distributed computing.
             </h2>
             <p class="story-sub reveal delay-2">
-              Combine weak PCs into a supercomputer. 1 machine coordinates, many machines execute.
+              Combine weak PCs into a supercomputer. 1 machine coordinates, many
+              machines execute.
             </p>
             <div
               class="diagram-stage reveal delay-3"
-              style="width: 1200px; height: 320px; margin-top: 20px"
+              style="width: 1240px; height: 260px; margin-top: 15px"
             >
-              <svg viewBox="0 0 1200 310" width="100%" height="310">
-                <!-- Connecting lines from master to 3 nodes -->
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
+                <!-- Master Node Box (Clean & Bold) -->
+                <rect
+                  x="50"
+                  y="45"
+                  width="360"
+                  height="160"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text
+                  x="230"
+                  y="136"
+                  class="diagram-txt-title"
+                  font-size="34"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  MASTER NODE
+                </text>
+
+                <!-- Connecting lines from master to 3 worker nodes -->
                 <line
-                  x1="390"
-                  y1="155"
-                  x2="720"
-                  y2="60"
+                  x1="410"
+                  y1="125"
+                  x2="740"
+                  y2="55"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
                 <line
-                  x1="390"
-                  y1="155"
-                  x2="720"
-                  y2="155"
+                  x1="410"
+                  y1="125"
+                  x2="740"
+                  y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
                 <line
-                  x1="390"
-                  y1="155"
-                  x2="720"
-                  y2="250"
+                  x1="410"
+                  y1="125"
+                  x2="740"
+                  y2="195"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
 
                 <!-- Packet animations -->
-                <circle r="4.5" class="packet-dot">
+                <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 390,155 L 720,60"
+                    path="M 410,125 L 740,55"
+                    dur="1.5s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="5" class="packet-dot">
+                  <animateMotion
+                    path="M 410,125 L 740,125"
+                    dur="1.2s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle r="5" class="packet-dot">
+                  <animateMotion
+                    path="M 410,125 L 740,195"
                     dur="1.7s"
                     repeatCount="indefinite"
                   />
                 </circle>
-                <circle r="4.5" class="packet-dot">
-                  <animateMotion
-                    path="M 390,155 L 720,155"
-                    dur="1.3s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-                <circle r="4.5" class="packet-dot">
-                  <animateMotion
-                    path="M 390,155 L 720,250"
-                    dur="2.0s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
 
-                <!-- Master Node Box (Clean & Bold) -->
+                <!-- Worker Node 01 -->
                 <rect
-                  x="80"
-                  y="85"
-                  width="310"
-                  height="140"
-                  rx="14"
-                  class="diagram-box-highlight"
-                />
-                <text x="235" y="163" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff">
-                  MASTER NODE
-                </text>
-
-                <!-- Worker Node 01 (Clean & Bold) -->
-                <rect
-                  x="720"
-                  y="30"
-                  width="400"
-                  height="64"
+                  x="740"
+                  y="28"
+                  width="450"
+                  height="54"
                   rx="10"
                   class="diagram-box"
                 />
-                <text x="920" y="70" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
-                  WORKER NODE 01
+                <text
+                  x="965"
+                  y="62"
+                  class="diagram-txt-title"
+                  font-size="20"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.01em"
+                >
+                  WORKER NODE 01 (STUDENT RIG)
                 </text>
 
-                <!-- Worker Node 02 (Clean & Bold) -->
+                <!-- Worker Node 02 -->
                 <rect
-                  x="720"
-                  y="123"
-                  width="400"
-                  height="64"
+                  x="740"
+                  y="98"
+                  width="450"
+                  height="54"
                   rx="10"
                   class="diagram-box"
                 />
-                <text x="920" y="163" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
-                  WORKER NODE 02
+                <text
+                  x="965"
+                  y="132"
+                  class="diagram-txt-title"
+                  font-size="20"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.01em"
+                >
+                  WORKER NODE 02 (DORM PC)
                 </text>
 
-                <!-- Worker Node 03 (Clean & Bold) -->
+                <!-- Worker Node 03 -->
                 <rect
-                  x="720"
-                  y="218"
-                  width="400"
-                  height="64"
+                  x="740"
+                  y="168"
+                  width="450"
+                  height="54"
                   rx="10"
                   class="diagram-box"
                 />
-                <text x="920" y="258" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
-                  WORKER NODE 03
+                <text
+                  x="965"
+                  y="202"
+                  class="diagram-txt-title"
+                  font-size="20"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.01em"
+                >
+                  WORKER NODE 03 (VOLUNTEER)
                 </text>
               </svg>
             </div>
@@ -1691,114 +2095,183 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px"
             >
-              Instead of waiting for incoming traffic, your PC connects <span class="text-highlight">outward to a public server</span>.
+              Instead of waiting for incoming traffic, your PC connects
+              <span class="text-highlight">outward to a public server</span>.
             </p>
-            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
-              <svg viewBox="0 0 1160 250" width="100%" height="250">
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1240px; height: 260px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
                 <!-- 1. Outside Competitor / Public Internet -->
                 <rect
-                  x="40"
-                  y="60"
-                  width="220"
-                  height="130"
+                  x="50"
+                  y="45"
+                  width="260"
+                  height="160"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="150" y="133" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
+                <text
+                  x="180"
+                  y="136"
+                  class="diagram-txt-title"
+                  font-size="28"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
                   OUTSIDE USER
                 </text>
 
                 <!-- Inbound Connection: User -> Public Server -->
                 <line
-                  x1="260"
+                  x1="310"
                   y1="125"
-                  x2="380"
+                  x2="420"
                   y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
-                <circle r="4.5" class="packet-dot">
+                <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 260,125 L 380,125"
-                    dur="1.4s"
+                    path="M 310,125 L 420,125"
+                    dur="1.3s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
                 <!-- 2. Public Server (Meeting Point) -->
                 <rect
-                  x="380"
-                  y="50"
-                  width="260"
-                  height="150"
+                  x="420"
+                  y="45"
+                  width="290"
+                  height="160"
                   rx="14"
                   class="diagram-box-highlight"
                 />
-                <text x="510" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff">
+                <text
+                  x="565"
+                  y="112"
+                  class="diagram-txt-title"
+                  font-size="30"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
                   PUBLIC SERVER
                 </text>
-                <text x="510" y="145" class="diagram-txt-accent" font-size="12" font-weight="700">
-                  MEETING POINT
+                <text
+                  x="565"
+                  y="148"
+                  class="diagram-txt-accent"
+                  font-size="16"
+                  font-weight="800"
+                  letter-spacing="0.02em"
+                >
+                  MEETING POINT (AWS)
                 </text>
 
-                <!-- 3. CGNAT / NAT Barrier (Bypassed) -->
+                <!-- Outbound Tunnel Connection: Home PC -> Public Server (Bypasses CGNAT) -->
                 <line
-                  x1="640"
+                  x1="710"
                   y1="125"
-                  x2="880"
+                  x2="940"
                   y2="125"
                   class="cluster-line-active"
-                  stroke-width="3"
+                  stroke-width="2.5"
                 />
-
-                <!-- Outbound packet moving from Home PC -> Public Server -->
                 <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 880,125 L 640,125"
-                    dur="1.6s"
+                    path="M 940,125 L 710,125"
+                    dur="1.5s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
-                <!-- CGNAT Barrier Box with bypass label -->
+                <!-- CGNAT Barrier Box with bypass label (Red) -->
                 <rect
-                  x="700"
+                  x="755"
                   y="45"
-                  width="120"
+                  width="140"
                   height="160"
                   rx="10"
                   class="diagram-box-barrier"
                 />
-                <text x="760" y="90" fill="#ff6b6b" font-family="var(--font-mono)" font-size="12" font-weight="800" text-anchor="middle">
+                <text
+                  x="825"
+                  y="85"
+                  fill="#ff3b30"
+                  font-family="var(--font-mono)"
+                  font-size="16"
+                  font-weight="900"
+                  text-anchor="middle"
+                  letter-spacing="0.02em"
+                >
                   CGNAT
                 </text>
-                <text x="760" y="115" fill="#888888" font-family="var(--font-mono)" font-size="9" text-anchor="middle">
+                <text
+                  x="825"
+                  y="110"
+                  fill="#a1a1a1"
+                  font-family="var(--font-mono)"
+                  font-size="12"
+                  font-weight="700"
+                  text-anchor="middle"
+                >
                   BLOCKS INBOUND
                 </text>
-                <line x1="715" y1="125" x2="805" y2="125" stroke="rgba(255,255,255,0.2)" />
-                <text x="760" y="150" fill="#ffffff" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle">
-                  OUTBOUND
+                <line
+                  x1="770"
+                  y1="122"
+                  x2="880"
+                  y2="122"
+                  stroke="rgba(255,255,255,0.15)"
+                />
+                <text
+                  x="825"
+                  y="146"
+                  fill="#ffffff"
+                  font-family="var(--font-mono)"
+                  font-size="12"
+                  font-weight="800"
+                  text-anchor="middle"
+                >
+                  OUTBOUND TUNNEL
                 </text>
-                <text x="760" y="165" fill="#ffffff" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle">
-                  TUNNEL ➔
-                </text>
-                <text x="760" y="188" fill="#ffffff" font-family="var(--font-mono)" font-size="8" text-anchor="middle">
-                  [ALLOWED]
+                <text
+                  x="825"
+                  y="172"
+                  fill="#ffffff"
+                  font-family="var(--font-mono)"
+                  font-size="11"
+                  font-weight="800"
+                  text-anchor="middle"
+                >
+                  [ ALLOWED ➔ ]
                 </text>
 
-                <!-- 4. Your PC / Worker Node -->
+                <!-- 3. Your PC / Worker Node -->
                 <rect
-                  x="880"
-                  y="60"
-                  width="240"
-                  height="130"
+                  x="940"
+                  y="45"
+                  width="250"
+                  height="160"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="1000" y="133" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff">
-                  YOUR PC
+                <text
+                  x="1065"
+                  y="136"
+                  class="diagram-txt-title"
+                  font-size="25"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  YOUR BEDROOM PC
                 </text>
               </svg>
             </div>
@@ -1827,86 +2300,121 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px"
             >
-              AWS gives the public front door. <span class="text-highlight">Tailscale connects the private mesh</span>.
+              AWS gives the public front door.
+              <span class="text-highlight"
+                >Tailscale connects the private mesh</span
+              >.
             </p>
-            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
-              <svg viewBox="0 0 1160 250" width="100%" height="250">
-                <!-- Conduit Tube for Tailscale -->
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1240px; height: 260px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
+                <!-- Left: AWS (Public Entry - Highlighted in Red) -->
                 <rect
-                  x="330"
-                  y="90"
+                  x="50"
+                  y="45"
+                  width="330"
+                  height="160"
+                  rx="14"
+                  class="diagram-box-highlight"
+                />
+                <text
+                  x="215"
+                  y="110"
+                  class="diagram-txt-title"
+                  font-size="28"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="-0.02em"
+                >
+                  AWS FREE TIER (EC2)
+                </text>
+                <text
+                  x="215"
+                  y="146"
+                  class="diagram-txt-accent"
+                  font-size="16"
+                  font-weight="800"
+                  text-anchor="middle"
+                  letter-spacing="0.02em"
+                >
+                  PUBLIC IP
+                </text>
+
+                <!-- Conduit Tube for Tailscale in the middle -->
+                <rect
+                  x="380"
+                  y="85"
                   width="480"
-                  height="70"
+                  height="80"
                   rx="12"
                   fill="rgba(255,255,255,0.03)"
                   stroke="rgba(255,255,255,0.2)"
                   stroke-width="1.5"
                 />
                 <line
-                  x1="330"
+                  x1="380"
                   y1="125"
-                  x2="810"
+                  x2="860"
                   y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
 
-                <!-- Bidirectional packet stream -->
-                <circle r="4.5" class="packet-dot">
+                <!-- Bidirectional animated packets -->
+                <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 800,125 L 340,125"
-                    dur="1.8s"
+                    path="M 850,125 L 390,125"
+                    dur="1.6s"
                     repeatCount="indefinite"
                   />
                 </circle>
-                <circle r="4.5" class="packet-dot">
+                <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 340,125 L 800,125"
-                    dur="1.8s"
+                    path="M 390,125 L 850,125"
+                    dur="1.6s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
                 <!-- Conduit Label -->
-                <text x="570" y="118" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
-                  TAILSCALE MESH
-                </text>
-                <text x="570" y="142" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
-                  ENCRYPTED OVERLAY ➔
-                </text>
-
-                <!-- Left: AWS (Public Entry) -->
-                <rect
-                  x="50"
-                  y="55"
-                  width="280"
-                  height="140"
-                  rx="14"
-                  class="diagram-box-highlight"
-                />
-                <text x="190" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
-                  AWS FREE TIER
-                </text>
-                <text x="190" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
-                  PUBLIC IP // ₱0.00
+                <text
+                  x="620"
+                  y="115"
+                  class="diagram-txt-title"
+                  font-size="20"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="0.01em"
+                >
+                  TAILSCALE ENCRYPTED MESH
                 </text>
 
                 <!-- Right: Student Rig (Compute) -->
                 <rect
-                  x="810"
-                  y="55"
-                  width="300"
-                  height="140"
+                  x="860"
+                  y="45"
+                  width="330"
+                  height="160"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="960" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
+                <text
+                  x="1025"
+                  y="136"
+                  class="diagram-txt-title"
+                  font-size="32"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="-0.02em"
+                >
                   STUDENT RIG
-                </text>
-                <text x="960" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
-                  OUTBOUND TUNNEL
                 </text>
               </svg>
             </div>
@@ -1935,120 +2443,186 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px"
             >
-              Student hardware = <span class="text-highlight">24 CPU cores & 80GB RAM for ₱0.00</span>.
+              Student hardware =
+              <span class="text-highlight"
+                >24 CPU cores & 80GB RAM for ₱0.00</span
+              >.
             </p>
-            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
-              <svg viewBox="0 0 1160 250" width="100%" height="250">
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1240px; height: 260px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
                 <!-- 3 Member Hardware Nodes (Gaming PCs & Laptops) -->
                 <rect
-                  x="80"
-                  y="15"
-                  width="300"
-                  height="65"
+                  x="50"
+                  y="28"
+                  width="450"
+                  height="54"
                   rx="10"
                   class="diagram-box"
                 />
-                <text x="230" y="42" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
+                <text
+                  x="275"
+                  y="50"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="-0.01em"
+                >
                   GAMING PC (RTX 4070)
                 </text>
-                <text x="230" y="63" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
+                <text
+                  x="275"
+                  y="71"
+                  class="diagram-txt-sub"
+                  font-size="14"
+                  font-weight="700"
+                  fill="#a1a1a1"
+                  text-anchor="middle"
+                  letter-spacing="0.02em"
+                >
                   8 CORES // 32GB RAM
                 </text>
 
                 <rect
-                  x="80"
-                  y="92"
-                  width="300"
-                  height="65"
+                  x="50"
+                  y="98"
+                  width="450"
+                  height="54"
                   rx="10"
                   class="diagram-box"
                 />
-                <text x="230" y="119" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
+                <text
+                  x="275"
+                  y="120"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="-0.01em"
+                >
                   GAMING LAPTOP (RYZEN 7)
                 </text>
-                <text x="230" y="140" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
+                <text
+                  x="275"
+                  y="141"
+                  class="diagram-txt-sub"
+                  font-size="14"
+                  font-weight="700"
+                  fill="#a1a1a1"
+                  text-anchor="middle"
+                  letter-spacing="0.02em"
+                >
                   8 CORES // 16GB RAM
                 </text>
 
                 <rect
-                  x="80"
-                  y="170"
-                  width="300"
-                  height="65"
+                  x="50"
+                  y="168"
+                  width="450"
+                  height="54"
                   rx="10"
                   class="diagram-box"
                 />
-                <text x="230" y="197" class="diagram-txt-title" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">
+                <text
+                  x="275"
+                  y="190"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="-0.01em"
+                >
                   GAMING PC (I7 DESKTOP)
                 </text>
-                <text x="230" y="218" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="middle">
+                <text
+                  x="275"
+                  y="211"
+                  class="diagram-txt-sub"
+                  font-size="14"
+                  font-weight="700"
+                  fill="#a1a1a1"
+                  text-anchor="middle"
+                  letter-spacing="0.02em"
+                >
                   8 CORES // 32GB RAM
                 </text>
 
-                <!-- Converging Pool Lines -->
+                <!-- Converging Pool Lines to Focal Box -->
                 <line
-                  x1="380"
-                  y1="47"
-                  x2="640"
+                  x1="500"
+                  y1="55"
+                  x2="780"
                   y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
                 <line
-                  x1="380"
+                  x1="500"
                   y1="125"
-                  x2="640"
+                  x2="780"
                   y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
                 <line
-                  x1="380"
-                  y1="202"
-                  x2="640"
+                  x1="500"
+                  y1="195"
+                  x2="780"
                   y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
 
-                <circle r="4" class="packet-dot">
+                <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 380,47 L 640,125"
-                    dur="1.6s"
+                    path="M 500,55 L 780,125"
+                    dur="1.5s"
                     repeatCount="indefinite"
                   />
                 </circle>
-                <circle r="4" class="packet-dot">
+                <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 380,125 L 640,125"
-                    dur="1.6s"
+                    path="M 500,125 L 780,125"
+                    dur="1.2s"
                     repeatCount="indefinite"
                   />
                 </circle>
-                <circle r="4" class="packet-dot">
+                <circle r="5" class="packet-dot">
                   <animateMotion
-                    path="M 380,202 L 640,125"
-                    dur="1.6s"
+                    path="M 500,195 L 780,125"
+                    dur="1.7s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
-                <!-- Aggregate Pool Box (Focal) -->
+                <!-- Aggregate Pool Box (Focal - Highlighted in Red) -->
                 <rect
-                  x="640"
-                  y="55"
-                  width="440"
-                  height="140"
+                  x="780"
+                  y="45"
+                  width="410"
+                  height="160"
                   rx="14"
                   class="diagram-box-highlight"
                 />
-                <text x="860" y="112" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff" text-anchor="middle">
+                <text
+                  x="985"
+                  y="135"
+                  class="diagram-txt-title"
+                  font-size="34"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="-0.02em"
+                >
                   24 CORES // 80GB RAM
-                </text>
-                <text x="860" y="148" class="diagram-txt-accent" font-size="15" font-weight="700" text-anchor="middle">
-                  ₱0.00 CLOUD BILL
                 </text>
               </svg>
             </div>
@@ -2077,92 +2651,148 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px"
             >
-              The Enterprise Hybrid Cloud pattern. AWS handles edge protection; student rigs handle the compute.
+              The Enterprise Hybrid Cloud pattern. AWS handles edge protection;
+              student rigs handle the compute.
             </p>
-            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
-              <svg viewBox="0 0 1160 250" width="100%" height="250">
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1240px; height: 260px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
                 <!-- Step 1: Competitor Connection -->
                 <rect
                   x="50"
-                  y="55"
-                  width="280"
-                  height="140"
+                  y="35"
+                  width="330"
+                  height="180"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="190" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
-                  COMPETITOR
+                <text
+                  x="215"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  Competitor
                 </text>
-                <text x="190" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
-                  CONNECTS TO AWS
+                <text
+                  x="215"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
+                >
+                  Connects to AWS
                 </text>
 
-                <!-- Hop 1 -->
+                <!-- Hop 1: Competitor -> AWS -->
                 <line
-                  x1="330"
+                  x1="380"
                   y1="125"
-                  x2="450"
+                  x2="455"
                   y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
+                <polygon points="450,121 458,125 450,129" fill="#888888" />
                 <circle r="4.5" class="packet-dot">
                   <animateMotion
-                    path="M 330,125 L 450,125"
-                    dur="1.2s"
+                    path="M 380,125 L 455,125"
+                    dur="1.3s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
                 <!-- Step 2: AWS Ingress Router -->
                 <rect
-                  x="450"
-                  y="55"
-                  width="280"
-                  height="140"
+                  x="455"
+                  y="35"
+                  width="330"
+                  height="180"
                   rx="14"
-                  class="diagram-box-highlight"
+                  class="diagram-box"
                 />
-                <text x="590" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
-                  AWS INGRESS
+
+                <text
+                  x="620"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  AWS Ingress
                 </text>
-                <text x="590" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
-                  FORWARDS TRAFFIC ➔
+                <text
+                  x="620"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
+                >
+                  Port Dispatch
                 </text>
 
-                <!-- Hop 2 -->
+                <!-- Hop 2: AWS -> Dorm Container -->
                 <line
-                  x1="730"
+                  x1="785"
                   y1="125"
-                  x2="850"
+                  x2="860"
                   y2="125"
                   class="cluster-line-active"
                   stroke-width="2.5"
                 />
+                <polygon points="855,121 863,125 855,129" fill="#888888" />
                 <circle r="4.5" class="packet-dot">
                   <animateMotion
-                    path="M 730,125 L 850,125"
-                    dur="1.2s"
+                    path="M 785,125 L 860,125"
+                    dur="1.3s"
                     repeatCount="indefinite"
                   />
                 </circle>
 
-                <!-- Step 3: Targeted Container -->
+                <!-- Step 3: Targeted Dorm Container -->
                 <rect
-                  x="850"
-                  y="55"
-                  width="280"
-                  height="140"
+                  x="860"
+                  y="35"
+                  width="330"
+                  height="180"
                   rx="14"
                   class="diagram-box"
                 />
-                <text x="990" y="115" class="diagram-txt-title" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">
-                  DORM CONTAINER
+
+                <text
+                  x="1025"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
+                >
+                  Dorm Rig
                 </text>
-                <text x="990" y="145" class="diagram-txt-accent" font-size="13" font-weight="700" text-anchor="middle">
-                  EXECUTES CHALLENGE
+                <text
+                  x="1025"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
+                >
+                  Executes Challenge
                 </text>
               </svg>
             </div>
@@ -2191,222 +2821,154 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 24px; max-width: 1100px; margin-bottom: 40px;"
+              style="font-size: 24px; max-width: 1100px; margin-bottom: 40px"
             >
-              How we kept student PCs safe: <span class="text-highlight">Zero access to host files or dorm Wi-Fi</span>.
+              How we kept student PCs safe:
+              <span class="text-highlight"
+                >Zero access to host files or dorm Wi-Fi</span
+              >.
             </p>
 
-            <!-- Ultra-Clean 3-Stage Pipeline Cards -->
             <div
-              class="reveal delay-3"
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 24px;
-                width: 1240px;
-              "
+              class="diagram-stage reveal delay-3"
+              style="width: 1240px; height: 260px; margin-top: 10px"
             >
-              <!-- Card 1: AWS -->
-              <div
-                class="arch-tier"
-                style="
-                  flex: 1;
-                  padding: 36px 28px;
-                  text-align: center;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  border-radius: 16px;
-                "
-              >
-                <div
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 13px;
-                    letter-spacing: 0.12em;
-                    color: var(--text-muted);
-                    font-weight: 700;
-                    margin-bottom: 8px;
-                  "
-                >
-                  STEP 01
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-display);
-                    font-size: 32px;
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin-bottom: 6px;
-                  "
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
+                <!-- 1. AWS Box (Public Edge) -->
+                <rect
+                  x="50"
+                  y="35"
+                  width="330"
+                  height="180"
+                  rx="14"
+                  class="diagram-box"
+                />
+
+                <text
+                  x="215"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
                 >
                   AWS
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 14px;
-                    color: #ffffff;
-                    font-weight: 700;
-                    margin-bottom: 18px;
-                  "
+                </text>
+                <text
+                  x="215"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
                 >
                   Public Edge
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-body);
-                    font-size: 16px;
-                    color: var(--text-secondary);
-                    line-height: 1.5;
-                  "
-                >
-                  Takes external hits & DDoS. Never exposes private IPs.
-                </div>
-              </div>
+                </text>
 
-              <!-- Arrow 1 -->
-              <div
-                style="
-                  font-size: 32px;
-                  color: rgba(255, 255, 255, 0.4);
-                  user-select: none;
-                "
-              >
-                ➔
-              </div>
+                <!-- Flow Line: AWS -> Tailscale (Animated Packets) -->
+                <line
+                  x1="380"
+                  y1="125"
+                  x2="455"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <polygon points="450,121 458,125 450,129" fill="#888888" />
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 380,125 L 455,125"
+                    dur="1.3s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
 
-              <!-- Card 2: Tailscale -->
-              <div
-                class="arch-tier"
-                style="
-                  flex: 1;
-                  padding: 36px 28px;
-                  text-align: center;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  border-radius: 16px;
-                  border-color: rgba(255, 255, 255, 0.35);
-                  box-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
-                "
-              >
-                <div
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 13px;
-                    letter-spacing: 0.12em;
-                    color: var(--text-muted);
-                    font-weight: 700;
-                    margin-bottom: 8px;
-                  "
-                >
-                  STEP 02
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-display);
-                    font-size: 32px;
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin-bottom: 6px;
-                  "
+                <!-- 2. Tailscale Box (Encrypted Mesh) -->
+                <rect
+                  x="455"
+                  y="35"
+                  width="330"
+                  height="180"
+                  rx="14"
+                  class="diagram-box"
+                />
+
+                <text
+                  x="620"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
                 >
                   Tailscale
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 14px;
-                    color: #ffffff;
-                    font-weight: 700;
-                    margin-bottom: 18px;
-                  "
+                </text>
+                <text
+                  x="620"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
                 >
                   Encrypted Mesh
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-body);
-                    font-size: 16px;
-                    color: var(--text-secondary);
-                    line-height: 1.5;
-                  "
-                >
-                  Direct private WireGuard tunnel. 0 router ports open.
-                </div>
-              </div>
+                </text>
 
-              <!-- Arrow 2 -->
-              <div
-                style="
-                  font-size: 32px;
-                  color: rgba(255, 255, 255, 0.4);
-                  user-select: none;
-                "
-              >
-                ➔
-              </div>
+                <!-- Flow Line: Tailscale -> Proxmox (Animated Packets) -->
+                <line
+                  x1="785"
+                  y1="125"
+                  x2="860"
+                  y2="125"
+                  class="cluster-line-active"
+                  stroke-width="2.5"
+                />
+                <polygon points="855,121 863,125 855,129" fill="#888888" />
+                <circle r="4.5" class="packet-dot">
+                  <animateMotion
+                    path="M 785,125 L 860,125"
+                    dur="1.3s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
 
-              <!-- Card 3: Proxmox -->
-              <div
-                class="arch-tier"
-                style="
-                  flex: 1;
-                  padding: 36px 28px;
-                  text-align: center;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  border-radius: 16px;
-                "
-              >
-                <div
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 13px;
-                    letter-spacing: 0.12em;
-                    color: var(--text-muted);
-                    font-weight: 700;
-                    margin-bottom: 8px;
-                  "
-                >
-                  STEP 03
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-display);
-                    font-size: 32px;
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin-bottom: 6px;
-                  "
+                <!-- 3. Proxmox Box (VM Sandbox) -->
+                <rect
+                  x="860"
+                  y="35"
+                  width="330"
+                  height="180"
+                  rx="14"
+                  class="diagram-box"
+                />
+
+                <text
+                  x="1025"
+                  y="108"
+                  class="diagram-txt-title"
+                  font-size="38"
+                  font-weight="900"
+                  fill="#ffffff"
+                  letter-spacing="-0.02em"
                 >
                   Proxmox
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 14px;
-                    color: #ffffff;
-                    font-weight: 700;
-                    margin-bottom: 18px;
-                  "
+                </text>
+                <text
+                  x="1025"
+                  y="145"
+                  class="diagram-txt-title"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#ffffff"
+                  letter-spacing="0.02em"
                 >
                   VM Sandbox
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-body);
-                    font-size: 16px;
-                    color: var(--text-secondary);
-                    line-height: 1.5;
-                  "
-                >
-                  Hardware-isolated VM. Quarantined from host OS & LAN.
-                </div>
-              </div>
+                </text>
+              </svg>
             </div>
           </div>
         </section>
@@ -2435,7 +2997,13 @@
             </div>
             <div
               class="story-stat reveal delay-2"
-              style="font-size: 220px; margin: 20px 0; font-weight: 900; letter-spacing: -0.06em; line-height: 1;"
+              style="
+                font-size: 220px;
+                margin: 20px 0;
+                font-weight: 900;
+                letter-spacing: -0.06em;
+                line-height: 1;
+              "
             >
               ₱0.00
             </div>
@@ -2464,56 +3032,83 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px;"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 30px"
             >
-              Budget buys convenience. <span class="text-highlight">Constraints force real engineering</span>.
+              Budget buys convenience.
+              <span class="text-highlight"
+                >Constraints force real engineering</span
+              >.
             </p>
-            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
-              <svg viewBox="0 0 1160 250" width="100%" height="250">
+            <div
+              class="diagram-stage reveal delay-3"
+              style="width: 1240px; height: 260px; margin-top: 10px"
+            >
+              <svg viewBox="0 0 1240 250" width="100%" height="250">
                 <!-- Card 1: Easy Mode -->
                 <rect
-                  x="80"
-                  y="55"
-                  width="440"
-                  height="140"
+                  x="50"
+                  y="45"
+                  width="510"
+                  height="160"
                   rx="14"
                   class="diagram-box"
                   opacity="0.6"
                 />
-                <text x="300" y="115" class="diagram-txt-title" font-size="20" font-weight="700" fill="#707070" text-anchor="middle">
-                  SWIPING A CARD
-                </text>
-                <text x="300" y="145" class="diagram-txt-sub" font-size="13" font-weight="500" fill="#555555" text-anchor="middle">
-                  BUYS CONVENIENCE
+                <text
+                  x="305"
+                  y="136"
+                  class="diagram-txt-title"
+                  font-size="28"
+                  font-weight="900"
+                  fill="#888888"
+                  text-anchor="middle"
+                  letter-spacing="-0.02em"
+                >
+                  SWIPING A CREDIT CARD
                 </text>
 
-                <!-- VS Badge -->
+                <!-- VS Badge (Monochrome Accent) -->
                 <circle
-                  cx="580"
+                  cx="620"
                   cy="125"
-                  r="24"
+                  r="28"
                   fill="#141414"
-                  stroke="rgba(255,255,255,0.3)"
-                  stroke-width="1.5"
+                  stroke="#ffffff"
+                  stroke-width="2"
                 />
-                <text x="580" y="131" class="diagram-txt-title" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">
+                <text
+                  x="620"
+                  y="132"
+                  class="diagram-txt-title"
+                  font-size="16"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="0.02em"
+                >
                   VS
                 </text>
 
-                <!-- Card 2: Growth Mode -->
+                <!-- Card 2: Growth Mode (Highlighted in Red) -->
                 <rect
-                  x="640"
-                  y="55"
-                  width="440"
-                  height="140"
+                  x="680"
+                  y="45"
+                  width="510"
+                  height="160"
                   rx="14"
                   class="diagram-box-highlight"
                 />
-                <text x="860" y="115" class="diagram-txt-title" font-size="22" font-weight="800" fill="#ffffff" text-anchor="middle">
+                <text
+                  x="935"
+                  y="136"
+                  class="diagram-txt-title"
+                  font-size="30"
+                  font-weight="900"
+                  fill="#ffffff"
+                  text-anchor="middle"
+                  letter-spacing="-0.02em"
+                >
                   OVERCOMING CONSTRAINTS
-                </text>
-                <text x="860" y="148" class="diagram-txt-accent" font-size="14" font-weight="700" text-anchor="middle">
-                  BUILDS TRUE MASTERY
                 </text>
               </svg>
             </div>
@@ -2542,13 +3137,13 @@
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 24px;"
+              style="font-size: 26px; max-width: 1100px; margin-bottom: 24px"
             >
               Our job isn't to buy solutions. Our job is to engineer them.
             </p>
             <div
               class="meme-card reveal delay-3"
-              style="max-height: 480px; width: auto; overflow: hidden;"
+              style="max-height: 480px; width: auto; overflow: hidden"
             >
               <img
                 src="memes/slide23_meme.jpg"
@@ -2570,18 +3165,15 @@
         <section
           class="slide"
           data-slide="24"
-          data-cue="<strong>CLOSING CHALLENGE:</strong><br>• Leaving the room with one driving challenge to everyone:<br>• <em>&quot;What are we building this year?&quot;</em>"
+          data-cue='<strong>CLOSING CHALLENGE:</strong><br>• Leaving the room with one driving challenge to everyone:<br>• <em>"What are we building this year?"</em>'
         >
           <div class="story-container">
             <h2
               class="story-statement reveal delay-1"
-              style="
-                font-size: 88px;
-                max-width: 1300px;
-                line-height: 1.15;
-              "
+              style="font-size: 88px; max-width: 1300px; line-height: 1.15"
             >
-              What are we <span class="text-underline">building this year</span>?
+              What are we
+              <span class="text-underline">building this year</span>?
             </h2>
           </div>
         </section>
@@ -2592,21 +3184,24 @@
         <section
           class="slide"
           data-slide="25"
-          data-cue="<strong>Q&A & ATTENDANCE:</strong><br>• Open floor for questions<br>• Mandatory attendance checkout: Scan QR codes for GitHub, Portfolio (mj.erosa.page), LinkedIn<br>• Comic relief: <em>&quot;I said... any questions? Did you scan the QR codes?&quot;</em>"
+          data-cue='<strong>Q&A & ATTENDANCE:</strong><br>• Open floor for questions<br>• Mandatory attendance checkout: Scan QR codes for GitHub, Portfolio (mj.erosa.page), LinkedIn<br>• Comic relief: <em>"I said... any questions? Did you scan the QR codes?"</em>'
         >
-          <div class="story-container" style="max-width: 1500px; padding: 0 40px; justify-content: center;">
+          <div
+            class="story-container"
+            style="max-width: 1720px; padding: 0 40px; justify-content: center"
+          >
             <h2
               class="story-statement reveal delay-1"
-              style="font-size: 64px; line-height: 1.1; margin-bottom: 8px;"
+              style="font-size: 72px; line-height: 1.1; margin-bottom: 10px"
             >
               Any Questions?
             </h2>
             <p
               class="story-sub reveal delay-2"
               style="
-                font-size: 20px;
+                font-size: 24px;
                 margin-top: 0;
-                margin-bottom: 22px;
+                margin-bottom: 30px;
                 color: #ffffff;
                 font-weight: 500;
               "
@@ -2614,191 +3209,218 @@
               Scan to connect. Following is mandatory for attendance.
             </p>
 
-            <!-- Top Row: 3 QR Code Cards -->
             <div
-              class="grid-3 reveal delay-3"
-              style="width: 1100px; gap: 28px; margin-bottom: 24px;"
-            >
-              <!-- Card 1: GitHub -->
-              <div
-                class="arch-tier"
-                style="
-                  text-align: center;
-                  padding: 18px 16px;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                "
-              >
-                <div
-                  style="
-                    background: #ffffff;
-                    padding: 8px;
-                    border-radius: 10px;
-                    display: inline-block;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <img
-                    src="qr_github.png"
-                    alt="GitHub QR Code"
-                    style="width: 110px; height: 110px; display: block;"
-                  />
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-display);
-                    font-size: 18px;
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin-bottom: 4px;
-                  "
-                >
-                  GitHub
-                </div>
-                <a
-                  href="https://github.com/marvinjameserosa"
-                  target="_blank"
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 12px;
-                    color: #ffffff;
-                    text-decoration: none;
-                    font-weight: 700;
-                  "
-                >
-                  github.com/marvinjameserosa
-                </a>
-              </div>
-
-              <!-- Card 2: Website / Portfolio -->
-              <div
-                class="arch-tier"
-                style="
-                  text-align: center;
-                  padding: 18px 16px;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  border-color: rgba(255, 255, 255, 0.4);
-                  box-shadow: 0 0 35px rgba(255, 255, 255, 0.12);
-                "
-              >
-                <div
-                  style="
-                    background: #ffffff;
-                    padding: 8px;
-                    border-radius: 10px;
-                    display: inline-block;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <img
-                    src="qr_website.png"
-                    alt="Portfolio Website QR Code"
-                    style="width: 110px; height: 110px; display: block;"
-                  />
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-display);
-                    font-size: 18px;
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin-bottom: 4px;
-                  "
-                >
-                  Website
-                </div>
-                <a
-                  href="https://mj.erosa.page/"
-                  target="_blank"
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 12px;
-                    color: #ffffff;
-                    text-decoration: none;
-                    font-weight: 700;
-                  "
-                >
-                  mj.erosa.page
-                </a>
-              </div>
-
-              <!-- Card 3: LinkedIn -->
-              <div
-                class="arch-tier"
-                style="
-                  text-align: center;
-                  padding: 18px 16px;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                "
-              >
-                <div
-                  style="
-                    background: #ffffff;
-                    padding: 8px;
-                    border-radius: 10px;
-                    display: inline-block;
-                    margin-bottom: 10px;
-                  "
-                >
-                  <img
-                    src="qr_linkedin.png"
-                    alt="LinkedIn QR Code"
-                    style="width: 110px; height: 110px; display: block;"
-                  />
-                </div>
-                <div
-                  style="
-                    font-family: var(--font-display);
-                    font-size: 18px;
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin-bottom: 4px;
-                  "
-                >
-                  LinkedIn
-                </div>
-                <a
-                  href="https://linkedin.com/in/marvinjameserosa"
-                  target="_blank"
-                  style="
-                    font-family: var(--font-mono);
-                    font-size: 12px;
-                    color: #ffffff;
-                    text-decoration: none;
-                    font-weight: 700;
-                  "
-                >
-                  in/marvinjameserosa
-                </a>
-              </div>
-            </div>
-
-            <!-- Bottom: Gru Gun Enforcement Meme -->
-            <div
-              class="meme-card reveal delay-4"
               style="
-                max-height: 380px;
-                overflow: hidden;
-                border-radius: 16px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
-                border: 1px solid rgba(255, 255, 255, 0.2);
+                display: grid;
+                grid-template-columns: 1fr 480px;
+                gap: 40px;
+                width: 1600px;
+                align-items: stretch;
               "
             >
-              <img
-                src="memes/end_meme.png"
-                alt="Gru Gun Meme"
+              <!-- Left: 3 Large Scannable QR Cards -->
+              <div
+                class="reveal delay-3"
                 style="
-                  max-height: 380px;
-                  width: auto;
-                  object-fit: contain;
-                  display: block;
+                  display: grid;
+                  grid-template-columns: repeat(3, 1fr);
+                  gap: 20px;
                 "
-              />
+              >
+                <!-- Card 1: GitHub -->
+                <div
+                  class="arch-tier"
+                  style="
+                    text-align: center;
+                    padding: 24px 16px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 16px;
+                  "
+                >
+                  <div
+                    style="
+                      background: #ffffff;
+                      padding: 10px;
+                      border-radius: 14px;
+                      display: inline-block;
+                      margin-bottom: 14px;
+                      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+                    "
+                  >
+                    <img
+                      src="qr_github.png"
+                      alt="GitHub QR Code"
+                      style="width: 180px; height: 180px; display: block"
+                    />
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 24px;
+                      font-weight: 800;
+                      color: #ffffff;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    GitHub
+                  </div>
+                  <a
+                    href="https://github.com/marvinjameserosa"
+                    target="_blank"
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 13px;
+                      color: #ffffff;
+                      text-decoration: none;
+                      font-weight: 700;
+                      word-break: break-all;
+                    "
+                  >
+                    github.com/marvinjameserosa
+                  </a>
+                </div>
+
+                <!-- Card 2: Website / Portfolio -->
+                <div
+                  class="arch-tier"
+                  style="
+                    text-align: center;
+                    padding: 24px 16px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 16px;
+                  "
+                >
+                  <div
+                    style="
+                      background: #ffffff;
+                      padding: 10px;
+                      border-radius: 14px;
+                      display: inline-block;
+                      margin-bottom: 14px;
+                      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+                    "
+                  >
+                    <img
+                      src="qr_website.png"
+                      alt="Portfolio Website QR Code"
+                      style="width: 180px; height: 180px; display: block"
+                    />
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 24px;
+                      font-weight: 800;
+                      color: #ffffff;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    Website
+                  </div>
+                  <a
+                    href="https://mj.erosa.page/"
+                    target="_blank"
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 13px;
+                      color: #ffffff;
+                      text-decoration: none;
+                      font-weight: 700;
+                    "
+                  >
+                    mj.erosa.page
+                  </a>
+                </div>
+
+                <!-- Card 3: LinkedIn -->
+                <div
+                  class="arch-tier"
+                  style="
+                    text-align: center;
+                    padding: 24px 16px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 16px;
+                  "
+                >
+                  <div
+                    style="
+                      background: #ffffff;
+                      padding: 10px;
+                      border-radius: 14px;
+                      display: inline-block;
+                      margin-bottom: 14px;
+                      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+                    "
+                  >
+                    <img
+                      src="qr_linkedin.png"
+                      alt="LinkedIn QR Code"
+                      style="width: 180px; height: 180px; display: block"
+                    />
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 24px;
+                      font-weight: 800;
+                      color: #ffffff;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    LinkedIn
+                  </div>
+                  <a
+                    href="https://linkedin.com/in/marvinjameserosa"
+                    target="_blank"
+                    style="
+                      font-family: var(--font-mono);
+                      font-size: 13px;
+                      color: #ffffff;
+                      text-decoration: none;
+                      font-weight: 700;
+                    "
+                  >
+                    in/marvinjameserosa
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right: Gru Enforcement Meme (Borderless) -->
+              <div
+                class="reveal delay-4"
+                style="
+                  height: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  border: none;
+                  background: transparent;
+                  box-shadow: none;
+                  padding: 0;
+                "
+              >
+                <img
+                  src="memes/end_meme.png"
+                  alt="Gru Gun Meme"
+                  style="
+                    max-height: 480px;
+                    width: 100%;
+                    object-fit: contain;
+                    border: none;
+                    display: block;
+                  "
+                />
+              </div>
             </div>
           </div>
         </section>
