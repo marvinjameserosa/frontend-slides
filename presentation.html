@@ -2170,99 +2170,243 @@
         </section>
 
         <!-- ==========================================
-                 SLIDE 20: CTF APPLICATION 4: HOST ISOLATION (PROXMOX & VMS)
+                 SLIDE 20: CTF APPLICATION 4: HOST ISOLATION (AWS ➔ TAILSCALE ➔ PROXMOX)
                  ========================================== -->
         <section
           class="slide"
           data-slide="20"
-          data-cue="<strong>3 LAYERS OF DEFENSE:</strong><br>• Paano mapoprotektahan ang volunteer machines?<br>• Layer 1: Tailscale VPN (Direct point-to-point tunnel, zero access to home LAN)<br>• Layer 2: Proxmox VM (Hardware virtualization boundary; Tailscale terminates inside VM, not host OS)<br>• Layer 3: Docker Swarm (Containerized disposable challenge sandbox)"
+          data-cue="<strong>3 STEPS OF ISOLATION:</strong><br>• 1. <strong>AWS</strong>: Public Edge — all internet traffic hits AWS, absorbing attacks<br>• 2. <strong>Tailscale</strong>: Private Tunnel — encrypted mesh sends traffic to volunteer PCs without opening router ports<br>• 3. <strong>Proxmox</strong>: Hardware VM Sandbox — challenges run in isolated VM; host PC & Wi-Fi never touched"
         >
           <div class="story-container">
             <h2
               class="story-statement reveal delay-1"
               style="
-                font-size: 76px;
+                font-size: 72px;
                 max-width: 1300px;
                 line-height: 1.15;
-                margin-bottom: 20px;
+                margin-bottom: 12px;
               "
             >
-              3 layers of defense. Zero risk.
+              AWS ➔ Tailscale ➔ Proxmox
             </h2>
             <p
               class="story-sub reveal delay-2"
-              style="font-size: 26px; max-width: 1100px; margin-bottom: 26px;"
+              style="font-size: 24px; max-width: 1100px; margin-bottom: 40px;"
             >
-              Tailscale VPN ➔ Proxmox VM ➔ Docker Swarm. <span class="text-highlight">Zero access to host PC or dorm Wi-Fi</span>.
+              How we kept student PCs safe: <span class="text-highlight">Zero access to host files or dorm Wi-Fi</span>.
             </p>
-            <div class="diagram-stage reveal delay-3" style="width: 1160px; height: 260px; margin-top: 10px;">
-              <svg viewBox="0 0 1160 250" width="100%" height="250">
-                <!-- Layer 1: Physical Host PC -->
-                <rect
-                  x="50"
-                  y="15"
-                  width="1060"
-                  height="220"
-                  rx="14"
-                  class="diagram-box"
-                />
-                <text
-                  x="80"
-                  y="46"
-                  class="diagram-txt-title"
-                  font-size="15"
-                  font-weight="800"
-                  fill="#ffffff"
-                  text-anchor="start"
-                >
-                  LAYER 1: PHYSICAL HOST PC (WINDOWS / LINUX)
-                </text>
-                <text
-                  x="1080"
-                  y="46"
-                  fill="#888888"
-                  font-family="var(--font-mono)"
-                  font-size="12"
-                  font-weight="700"
-                  text-anchor="end"
-                >
-                  HOST FILES & DORM WI-FI QUARANTINED
-                </text>
 
-                <!-- Layer 2: Proxmox Isolated VM -->
-                <rect
-                  x="90"
-                  y="62"
-                  width="980"
-                  height="155"
-                  rx="12"
-                  class="diagram-box-highlight"
-                />
-                <text x="120" y="94" class="diagram-txt-title" font-size="15" font-weight="800" fill="#ffffff" text-anchor="start">
-                  LAYER 2: PROXMOX ISOLATED VM (TAILSCALE TERMINATES HERE)
-                </text>
-                <text x="1040" y="94" class="diagram-txt-accent" font-size="12" font-weight="700" text-anchor="end">
-                  HARDWARE HYPERVISOR BOUNDARY
-                </text>
+            <!-- Ultra-Clean 3-Stage Pipeline Cards -->
+            <div
+              class="reveal delay-3"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+                width: 1240px;
+              "
+            >
+              <!-- Card 1: AWS -->
+              <div
+                class="arch-tier"
+                style="
+                  flex: 1;
+                  padding: 36px 28px;
+                  text-align: center;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  border-radius: 16px;
+                "
+              >
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 13px;
+                    letter-spacing: 0.12em;
+                    color: var(--text-muted);
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                  "
+                >
+                  STEP 01
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 32px;
+                    font-weight: 800;
+                    color: #ffffff;
+                    margin-bottom: 6px;
+                  "
+                >
+                  AWS
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 14px;
+                    color: #ffffff;
+                    font-weight: 700;
+                    margin-bottom: 18px;
+                  "
+                >
+                  Public Edge
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 16px;
+                    color: var(--text-secondary);
+                    line-height: 1.5;
+                  "
+                >
+                  Takes external hits & DDoS. Never exposes private IPs.
+                </div>
+              </div>
 
-                <!-- Layer 3: Docker Swarm Sandboxed Containers -->
-                <rect
-                  x="130"
-                  y="114"
-                  width="900"
-                  height="85"
-                  rx="10"
-                  fill="rgba(0, 0, 0, 0.6)"
-                  stroke="rgba(255, 255, 255, 0.4)"
-                  stroke-width="1.5"
-                />
-                <text x="580" y="152" class="diagram-txt-title" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">
-                  LAYER 3: DOCKER SWARM CHALLENGE CONTAINERS
-                </text>
-                <text x="580" y="178" fill="#888888" font-family="var(--font-mono)" font-size="12" font-weight="700" text-anchor="middle">
-                  100% DISPOSABLE & QUARANTINED // ATTACKERS NEVER TOUCH VOLUNTEER MACHINES
-                </text>
-              </svg>
+              <!-- Arrow 1 -->
+              <div
+                style="
+                  font-size: 32px;
+                  color: rgba(255, 255, 255, 0.4);
+                  user-select: none;
+                "
+              >
+                ➔
+              </div>
+
+              <!-- Card 2: Tailscale -->
+              <div
+                class="arch-tier"
+                style="
+                  flex: 1;
+                  padding: 36px 28px;
+                  text-align: center;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  border-radius: 16px;
+                  border-color: rgba(255, 255, 255, 0.35);
+                  box-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
+                "
+              >
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 13px;
+                    letter-spacing: 0.12em;
+                    color: var(--text-muted);
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                  "
+                >
+                  STEP 02
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 32px;
+                    font-weight: 800;
+                    color: #ffffff;
+                    margin-bottom: 6px;
+                  "
+                >
+                  Tailscale
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 14px;
+                    color: #ffffff;
+                    font-weight: 700;
+                    margin-bottom: 18px;
+                  "
+                >
+                  Encrypted Mesh
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 16px;
+                    color: var(--text-secondary);
+                    line-height: 1.5;
+                  "
+                >
+                  Direct private WireGuard tunnel. 0 router ports open.
+                </div>
+              </div>
+
+              <!-- Arrow 2 -->
+              <div
+                style="
+                  font-size: 32px;
+                  color: rgba(255, 255, 255, 0.4);
+                  user-select: none;
+                "
+              >
+                ➔
+              </div>
+
+              <!-- Card 3: Proxmox -->
+              <div
+                class="arch-tier"
+                style="
+                  flex: 1;
+                  padding: 36px 28px;
+                  text-align: center;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  border-radius: 16px;
+                "
+              >
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 13px;
+                    letter-spacing: 0.12em;
+                    color: var(--text-muted);
+                    font-weight: 700;
+                    margin-bottom: 8px;
+                  "
+                >
+                  STEP 03
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 32px;
+                    font-weight: 800;
+                    color: #ffffff;
+                    margin-bottom: 6px;
+                  "
+                >
+                  Proxmox
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 14px;
+                    color: #ffffff;
+                    font-weight: 700;
+                    margin-bottom: 18px;
+                  "
+                >
+                  VM Sandbox
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-body);
+                    font-size: 16px;
+                    color: var(--text-secondary);
+                    line-height: 1.5;
+                  "
+                >
+                  Hardware-isolated VM. Quarantined from host OS & LAN.
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -2443,26 +2587,26 @@
         </section>
 
         <!-- ==========================================
-                 SLIDE 25: Q&A + MANDATORY FOLLOW
+                 SLIDE 25: Q&A + ATTENDANCE (MANDATORY FOLLOW)
                  ========================================== -->
         <section
           class="slide"
           data-slide="25"
-          data-cue="<strong>Q&A & ATTENDANCE:</strong><br>• Open floor for questions<br>• Mandatory attendance checkout: Scan QR codes for GitHub, Portfolio (mj.erosa.page), LinkedIn"
+          data-cue="<strong>Q&A & ATTENDANCE:</strong><br>• Open floor for questions<br>• Mandatory attendance checkout: Scan QR codes for GitHub, Portfolio (mj.erosa.page), LinkedIn<br>• Comic relief: <em>&quot;I said... any questions? Did you scan the QR codes?&quot;</em>"
         >
-          <div class="story-container">
+          <div class="story-container" style="max-width: 1500px; padding: 0 40px; justify-content: center;">
             <h2
               class="story-statement reveal delay-1"
-              style="font-size: 88px; line-height: 1.15; margin-bottom: 16px;"
+              style="font-size: 64px; line-height: 1.1; margin-bottom: 8px;"
             >
               Any Questions?
             </h2>
             <p
               class="story-sub reveal delay-2"
               style="
-                font-size: 28px;
+                font-size: 20px;
                 margin-top: 0;
-                margin-bottom: 36px;
+                margin-bottom: 22px;
                 color: #ffffff;
                 font-weight: 500;
               "
@@ -2470,16 +2614,17 @@
               Scan to connect. Following is mandatory for attendance.
             </p>
 
+            <!-- Top Row: 3 QR Code Cards -->
             <div
               class="grid-3 reveal delay-3"
-              style="margin-top: 10px; width: 1240px; gap: 40px;"
+              style="width: 1100px; gap: 28px; margin-bottom: 24px;"
             >
               <!-- Card 1: GitHub -->
               <div
                 class="arch-tier"
                 style="
                   text-align: center;
-                  padding: 36px 28px;
+                  padding: 18px 16px;
                   display: flex;
                   flex-direction: column;
                   align-items: center;
@@ -2488,25 +2633,25 @@
                 <div
                   style="
                     background: #ffffff;
-                    padding: 12px;
-                    border-radius: 14px;
+                    padding: 8px;
+                    border-radius: 10px;
                     display: inline-block;
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
                   "
                 >
                   <img
                     src="qr_github.png"
                     alt="GitHub QR Code"
-                    style="width: 180px; height: 180px; display: block;"
+                    style="width: 110px; height: 110px; display: block;"
                   />
                 </div>
                 <div
                   style="
                     font-family: var(--font-display);
-                    font-size: 26px;
+                    font-size: 18px;
                     font-weight: 800;
                     color: #ffffff;
-                    margin-bottom: 10px;
+                    margin-bottom: 4px;
                   "
                 >
                   GitHub
@@ -2516,7 +2661,7 @@
                   target="_blank"
                   style="
                     font-family: var(--font-mono);
-                    font-size: 15px;
+                    font-size: 12px;
                     color: #ffffff;
                     text-decoration: none;
                     font-weight: 700;
@@ -2531,7 +2676,7 @@
                 class="arch-tier"
                 style="
                   text-align: center;
-                  padding: 36px 28px;
+                  padding: 18px 16px;
                   display: flex;
                   flex-direction: column;
                   align-items: center;
@@ -2542,25 +2687,25 @@
                 <div
                   style="
                     background: #ffffff;
-                    padding: 12px;
-                    border-radius: 14px;
+                    padding: 8px;
+                    border-radius: 10px;
                     display: inline-block;
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
                   "
                 >
                   <img
                     src="qr_website.png"
                     alt="Portfolio Website QR Code"
-                    style="width: 180px; height: 180px; display: block;"
+                    style="width: 110px; height: 110px; display: block;"
                   />
                 </div>
                 <div
                   style="
                     font-family: var(--font-display);
-                    font-size: 26px;
+                    font-size: 18px;
                     font-weight: 800;
                     color: #ffffff;
-                    margin-bottom: 10px;
+                    margin-bottom: 4px;
                   "
                 >
                   Website
@@ -2570,7 +2715,7 @@
                   target="_blank"
                   style="
                     font-family: var(--font-mono);
-                    font-size: 15px;
+                    font-size: 12px;
                     color: #ffffff;
                     text-decoration: none;
                     font-weight: 700;
@@ -2585,7 +2730,7 @@
                 class="arch-tier"
                 style="
                   text-align: center;
-                  padding: 36px 28px;
+                  padding: 18px 16px;
                   display: flex;
                   flex-direction: column;
                   align-items: center;
@@ -2594,25 +2739,25 @@
                 <div
                   style="
                     background: #ffffff;
-                    padding: 12px;
-                    border-radius: 14px;
+                    padding: 8px;
+                    border-radius: 10px;
                     display: inline-block;
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
                   "
                 >
                   <img
                     src="qr_linkedin.png"
                     alt="LinkedIn QR Code"
-                    style="width: 180px; height: 180px; display: block;"
+                    style="width: 110px; height: 110px; display: block;"
                   />
                 </div>
                 <div
                   style="
                     font-family: var(--font-display);
-                    font-size: 26px;
+                    font-size: 18px;
                     font-weight: 800;
                     color: #ffffff;
-                    margin-bottom: 10px;
+                    margin-bottom: 4px;
                   "
                 >
                   LinkedIn
@@ -2622,7 +2767,7 @@
                   target="_blank"
                   style="
                     font-family: var(--font-mono);
-                    font-size: 15px;
+                    font-size: 12px;
                     color: #ffffff;
                     text-decoration: none;
                     font-weight: 700;
@@ -2632,33 +2777,27 @@
                 </a>
               </div>
             </div>
-          </div>
-        </section>
 
-        <!-- ==========================================
-                 SLIDE 26: FINAL ENFORCEMENT MEME
-                 ========================================== -->
-        <section
-          class="slide"
-          data-slide="26"
-          data-cue="<strong>FINAL ENFORCEMENT:</strong><br>• Comic relief: Gru with gun pointing at the audience<br>• Delivery: <em>&quot;I said... any questions? ...Did you scan the QR codes?&quot;</em><br>• Final laugh to seal the Cisco NetConnect onboarding talk"
-        >
-          <div class="story-container" style="justify-content: center; align-items: center;">
+            <!-- Bottom: Gru Gun Enforcement Meme -->
             <div
-              class="meme-card reveal delay-1"
+              class="meme-card reveal delay-4"
               style="
-                max-height: 800px;
-                width: auto;
+                max-height: 380px;
                 overflow: hidden;
-                border-radius: 18px;
-                box-shadow: 0 24px 70px rgba(0, 0, 0, 0.9);
-                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 16px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.2);
               "
             >
               <img
                 src="memes/end_meme.png"
                 alt="Gru Gun Meme"
-                style="max-height: 800px; width: auto; object-fit: contain; display: block;"
+                style="
+                  max-height: 380px;
+                  width: auto;
+                  object-fit: contain;
+                  display: block;
+                "
               />
             </div>
           </div>
@@ -2668,7 +2807,7 @@
 
     <!-- Matt Abrahams Presenter Cue & Engagement HUD (Toggle with 'P') -->
     <div id="presenterCue" class="presenter-cue hidden">
-      <span id="cueSlideBadge" class="cue-slide-badge">SLIDE 01/26</span>
+      <span id="cueSlideBadge" class="cue-slide-badge">SLIDE 01/25</span>
       <span class="cue-badge">PRESENTER CUE</span>
       <span id="cueText" class="cue-text"
         >Use Arrow Keys to navigate. Press [P] to view speaking cues.</span
